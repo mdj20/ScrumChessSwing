@@ -2,13 +2,17 @@ package com.mdj20.scrumchessswing;
 
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.util.Map;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class BoardPanel extends JPanel {
 	
 	private Square squares[][] = new Square[8][8];
-	
+	private Color highlight = Color.yellow;
+	private Square set ;
+	private boolean isSquareSet = false;
 	BoardPanel(){
 		super();
 		super.setLayout(new GridLayout(8,8));
@@ -21,24 +25,89 @@ public class BoardPanel extends JPanel {
 				if ((i+j)%2==0){
 					Square s = bs(j,i,Color.gray);
 					s.setWidthAndColor();
-					squares[j][i] = s;
+					squares[i][j] = s;
 					this.add(s);
 				}
 				else{
 					Square s = bs(j,i,Color.white);
 					s.setWidthAndColor();
-					squares[j][i] = s;
+					squares[i][j] = s;
 					this.add(s);
 				}
 			}
 		}
 	}
-	private static Square bs(int r, int f, Color c){
-		return new Square(r,f,c);	
+	private Square bs(int r, int f, Color c){
+		return new Square(r,f,c,this);	
 	}
 	
-	public Square getSquare(int rank, int file){
-		return squares[file][rank];
+	public Square getSquare(int x, int y){
+		return squares[y][x];
 	}
 
+	public void setBoard(String fen, Map<String,String> pieceMap){
+		int i=0;
+		int j=0;
+		for(char c : fen.toCharArray())	{
+			if(pieceMap.containsKey(Character.toString(c))){
+				JLabel label = this.getSquare(j,i).getjLabel();
+				label.setText(pieceMap.get(Character.toString(c)));
+				j++;
+			}
+			else if (Character.isDigit(c)){
+				j+=Character.getNumericValue(c);
+			}
+			else if (c == '/'){
+				i++;
+				j=0;
+			}
+		}
+	}
+	
+	public void squareClick(Square clicked){
+		System.out.println();
+		if(!this.isSquareSet){
+			setSquare(clicked);
+			highlightSquare(clicked);
+			System.out.println("Set");
+		}
+		else if(this.isSquareSet  && clicked.equals(this.set)){
+			System.out.println("Reclick");
+			unHighLight(this.set);
+			clearSquare();
+		}
+		else if(this.isSquareSet && !clicked.equals(this.set)){
+			unHighLight(this.set);
+			clearSquare();
+			System.out.println("CLicked elsewhere");
+		}
+		else{
+			System.out.println("Error");
+		}
+		
+	}
+		
+	private boolean setSquare(Square s){
+		boolean ret = false;
+		if (this.isSquareSet == false){
+			this.set = s;
+			this.isSquareSet = true;
+			ret = true;
+		}
+		return ret;
+	}
+	private void clearSquare(){
+		this.isSquareSet = false;
+	}
+	
+	private void highlightSquare(Square s){
+		s.setBackground(highlight);
+	}
+	private void unHighLight(Square s){
+		s.setBackground(s.getDefaultColor());
+	}
+	
+	
+	
+	
 }
