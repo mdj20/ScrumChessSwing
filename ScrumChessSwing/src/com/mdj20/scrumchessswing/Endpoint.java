@@ -4,10 +4,13 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
+import com.scrumchess.userrequests.NewGameRequest;
+
 public class Endpoint implements Runnable {
 
 	LinkedBlockingQueue<Move> userMoves;
 	private boolean running;
+	
 	
 	Endpoint(){
 		userMoves = new LinkedBlockingQueue<Move>();
