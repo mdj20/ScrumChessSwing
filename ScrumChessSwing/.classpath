@@ -3,5 +3,6 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Scrumchess"/>
+	<classpathentry kind="lib" path="C:/Users/Matthew/.p2/pool/plugins/com.google.appengine.eclipse.sdkbundle_1.9.34/appengine-java-sdk-1.9.34/jetty93-base/lib/gae/gson-2.3.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

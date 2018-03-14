@@ -7,16 +7,21 @@ import java.util.Map;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import com.mdj20.scrumchessswing.ajaxswingworkers.MoveSender;
+
 public class BoardPanel extends JPanel {
 	
 	private Square squares[][] = new Square[8][8];
 	private Color highlight = Color.yellow;
 	private Square set ;
 	private boolean isSquareSet = false;
-	BoardPanel(){
+	private Endpoint endpoint;
+	
+	BoardPanel(Endpoint ep){
 		super();
 		super.setLayout(new GridLayout(8,8));
 		initSquares();
+		this.endpoint = ep;
 	}
 	
 	private void initSquares(){
@@ -77,9 +82,13 @@ public class BoardPanel extends JPanel {
 			clearSquare();
 		}
 		else if(this.isSquareSet && !clicked.equals(this.set)){
+			
+			MoveSender ms = new MoveSender(endpoint,new Move("USER",this.set,clicked));
+			ms.execute();
 			unHighLight(this.set);
 			clearSquare();
 			System.out.println("CLicked elsewhere");
+			
 		}
 		else{
 			System.out.println("Error");
