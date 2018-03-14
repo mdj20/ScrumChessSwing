@@ -2,6 +2,7 @@ package com.mdj20.scrumchessswing;
 
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.util.ArrayList;
 import java.util.Map;
 
 import javax.swing.JLabel;
@@ -12,36 +13,38 @@ import com.mdj20.scrumchessswing.ajaxswingworkers.MoveSender;
 public class BoardPanel extends JPanel {
 	
 	private Square squares[][] = new Square[8][8];
-	private Color highlight = Color.yellow;
+	private Color highlight = Color.YELLOW;
 	private Square set ;
 	private boolean isSquareSet = false;
 	private Endpoint endpoint;
-	
+
 	BoardPanel(Endpoint ep){
-		super();
-		super.setLayout(new GridLayout(8,8));
+		setLayout(new GridLayout(8,8));
 		initSquares();
 		this.endpoint = ep;
 	}
 	
 	private void initSquares(){
+		ArrayList<Square> squareList = new ArrayList<Square>();
 		for (int i = 0 ; i < 8 ; i++){
 			for (int j = 0 ; j< 8 ; j++){	
 				if ((i+j)%2==0){
-					Square s = bs(j,i,Color.gray);
-					s.setWidthAndColor();
+					Square s = bs(j,i,Color.GRAY);
 					squares[i][j] = s;
-					this.add(s);
+					squareList.add(s);
 				}
 				else{
-					Square s = bs(j,i,Color.white);
-					s.setWidthAndColor();
+					Square s = bs(j,i,Color.WHITE);
 					squares[i][j] = s;
-					this.add(s);
+					squareList.add(s);
 				}
 			}
 		}
+		for(Square s: squareList) {
+			this.add(s);
+		}	
 	}
+	
 	private Square bs(int r, int f, Color c){
 		return new Square(r,f,c,this);	
 	}

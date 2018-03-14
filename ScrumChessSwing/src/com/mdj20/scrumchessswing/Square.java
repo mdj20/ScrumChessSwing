@@ -8,6 +8,7 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 public class Square extends JPanel {
 	static int defaultWidth = 100;
 	private int rank;
@@ -20,18 +21,15 @@ public class Square extends JPanel {
 	private BoardPanel boardPanel; // parent board
 	
 	Square(int file, int rank,BoardPanel boardPanel){
-		super();
 		setRFL(rank,file,boardPanel);
 	}
 	Square(int file, int rank, Color color ,BoardPanel boardPanel){
-		super();
 		this.defaultColor = color;
 		this.width = defaultWidth;
 		setRFL(rank,file,boardPanel);
 		
 	}
 	Square(int file, int rank, Color color, int width, BoardPanel boardPanel){
-		super();
 		this.defaultColor = color;
 		this.width = width;
 		setRFL(rank,file,boardPanel);
@@ -41,18 +39,20 @@ public class Square extends JPanel {
 		this.file = file;
 		this.boardPanel=boardPanel;
 		this.borderLayout = new BorderLayout();
-		this.setLayout(borderLayout);
+		setLayout(this.borderLayout);
+		setWidthAndColor();
 		this.jLabel = new JLabel();
-		jLabel.setFont(new Font(Font.MONOSPACED, Font.PLAIN, this.width*7/10));
-		jLabel.setHorizontalAlignment(jLabel.CENTER);
+		jLabel.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 23));
+		jLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		this.add(jLabel,BorderLayout.CENTER);
 		initMouseClickListener();
 	}
 	public void setWidthAndColor(){
-		super.setPreferredSize(new Dimension(this.width,this.width));
-		//super.setMinimumSize();
-		super.setBackground(this.defaultColor);
+		setPreferredSize(new Dimension(this.width,this.width));
+		setBackground(defaultColor);
 	}
+	
+	
 	
 	private void initMouseClickListener(){
 		this.addMouseListener(new MouseListener(){
@@ -87,9 +87,6 @@ public class Square extends JPanel {
 			}
 			
 		});
-		
-		
-		
 	}
 	
 	
@@ -117,6 +114,4 @@ public class Square extends JPanel {
 	public JLabel getjLabel() {
 		return jLabel;
 	}
-	
-	
 }
