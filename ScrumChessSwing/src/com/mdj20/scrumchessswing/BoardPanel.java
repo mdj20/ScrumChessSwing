@@ -83,8 +83,8 @@ public class BoardPanel extends JPanel {
 		}
 		else if(this.isSquareSet && !clicked.equals(this.set)){
 			
-			MoveSender ms = new MoveSender(endpoint,new Move("USER",this.set,clicked));
-			ms.execute();
+		//	MoveSender ms = new MoveSender(endpoint,new Move("USER",this.set,clicked));
+			//ms.execute();
 			unHighLight(this.set);
 			clearSquare();
 			System.out.println("CLicked elsewhere");
