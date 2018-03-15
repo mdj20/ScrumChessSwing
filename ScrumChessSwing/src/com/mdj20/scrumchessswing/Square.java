@@ -9,6 +9,7 @@ import java.awt.event.MouseListener;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+
 public class Square extends JPanel {
 	static int defaultWidth = 100;
 	private int rank;
@@ -76,7 +77,7 @@ public class Square extends JPanel {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
+				//
 				
 			}
 

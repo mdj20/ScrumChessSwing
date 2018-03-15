@@ -5,18 +5,23 @@ import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.Map;
 
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
 
 import com.mdj20.scrumchessswing.ajaxswingworkers.MoveSender;
 
 public class BoardPanel extends JPanel {
 	
-	private Square squares[][] = new Square[8][8];
-	private Color highlight = Color.YELLOW;
-	private Square set ;
-	private boolean isSquareSet = false;
-	private Endpoint endpoint;
+	 SquarePanel squares[][] = new SquarePanel[8][8];
+	 Color highlight = Color.YELLOW;
+	 Border boarderHightlight = BorderFactory.createLineBorder(Color.RED);
+	 Border emptyBorder = BorderFactory.createEmptyBorder();
+	 SquarePanel borderSet;
+	 SquarePanel set ;
+	 boolean isSquareSet = false;
+	 Endpoint endpoint;
 
 	BoardPanel(Endpoint ep){
 		setLayout(new GridLayout(8,8));
@@ -25,22 +30,22 @@ public class BoardPanel extends JPanel {
 	}
 	
 	private void initSquares(){
-		ArrayList<Square> squareList = new ArrayList<Square>();
+		ArrayList<SquarePanel> squareList = new ArrayList<SquarePanel>();
 		for (int i = 0 ; i < 8 ; i++){
 			for (int j = 0 ; j< 8 ; j++){	
 				if ((i+j)%2==0){
-					Square s = bs(j,i,Color.GRAY);
+					SquarePanel s = new SquarePanel(i,j,Color.GRAY, this);
 					squares[i][j] = s;
 					squareList.add(s);
 				}
 				else{
-					Square s = bs(j,i,Color.WHITE);
+					SquarePanel s = new SquarePanel(i,j,Color.WHITE, this);
 					squares[i][j] = s;
 					squareList.add(s);
 				}
 			}
 		}
-		for(Square s: squareList) {
+		for(SquarePanel s: squareList) {
 			this.add(s);
 		}	
 	}
@@ -49,7 +54,7 @@ public class BoardPanel extends JPanel {
 		return new Square(r,f,c,this);	
 	}
 	
-	public Square getSquare(int x, int y){
+	public SquarePanel getSquare(int x, int y){
 		return squares[y][x];
 	}
 
@@ -72,7 +77,7 @@ public class BoardPanel extends JPanel {
 		}
 	}
 	
-	public void squareClick(Square clicked){
+	public void squareClick(SquarePanel clicked){
 		System.out.println();
 		if(!this.isSquareSet){
 			setSquare(clicked);
@@ -81,6 +86,7 @@ public class BoardPanel extends JPanel {
 		}
 		else if(this.isSquareSet  && clicked.equals(this.set)){
 			System.out.println("Reclick");
+			setBorder(clicked);
 			unHighLight(this.set);
 			clearSquare();
 		}
@@ -98,8 +104,24 @@ public class BoardPanel extends JPanel {
 		}
 		
 	}
+	
+	boolean setBorder(SquarePanel s){
+		if(borderSet==null){
+			s.setBorder(boarderHightlight);
+			borderSet = s;
+			return true;
+		}
+		else
+			return false;
+	}
 		
-	private boolean setSquare(Square s){
+	void unSetBoarder(){
+		if(borderSet!=null){
+			borderSet.setBorder(emptyBorder);
+		}
+	}
+	
+	private boolean setSquare(SquarePanel s){
 		boolean ret = false;
 		if (this.isSquareSet == false){
 			this.set = s;
@@ -112,11 +134,11 @@ public class BoardPanel extends JPanel {
 		this.isSquareSet = false;
 	}
 	
-	private void highlightSquare(Square s){
+	private void highlightSquare(SquarePanel s){
 		s.setBackground(highlight);
 	}
-	private void unHighLight(Square s){
-		s.setBackground(s.getDefaultColor());
+	private void unHighLight(SquarePanel s){
+		s.setBackground(s.getNormalColor());
 	}
 	
 	

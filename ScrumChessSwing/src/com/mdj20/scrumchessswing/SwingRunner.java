@@ -39,7 +39,7 @@ public class SwingRunner {
 		topLevel.pack();
 		topLevel.setVisible(true);
 		List<String> ucodes = Piece.getUnicodeStringsList();
-		
+		boardPanel.setBoard("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",  Piece.getPieceKeyMap());
 		
 		
 		
