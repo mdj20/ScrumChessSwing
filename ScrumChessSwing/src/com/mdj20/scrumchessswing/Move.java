@@ -2,7 +2,6 @@ package com.mdj20.scrumchessswing;
 
 public class Move {
 	
-
 	String user;
 	Square to;
 	Square from;
@@ -24,5 +23,18 @@ public class Move {
 	}
 	public Square getFrom() {
 		return from;
+	}
+	
+	public int getFromRank(){
+		return from.getRank();
+	}
+	public int getToRank(){
+		return to.getRank();
+	}
+	public int getFromFile(){
+		return from.getFile();
+	}
+	public int getToFile(){
+		return to.getFile();
 	}
 }

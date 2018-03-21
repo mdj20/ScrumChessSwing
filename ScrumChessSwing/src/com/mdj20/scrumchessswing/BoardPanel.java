@@ -9,6 +9,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
 
 import com.mdj20.scrumchessswing.ajaxswingworkers.MoveSender;
 
@@ -16,10 +17,17 @@ public class BoardPanel extends JPanel {
 	
 	 SquarePanel squares[][] = new SquarePanel[8][8];
 	 Color highlight = Color.YELLOW;
-	 Border boarderHightlight = BorderFactory.createLineBorder(Color.RED);
+	 int borderThickness = 6;
+	 Border whiteFrom = BorderFactory.createLineBorder(Color.RED, borderThickness);
+	 Border whitetTo = BorderFactory.createLineBorder(Color.BLUE, borderThickness);
+	 Border blackFrom = BorderFactory.createLineBorder(Color.GREEN, borderThickness);
+	 Border blacktTo = BorderFactory.createLineBorder(Color.ORANGE, borderThickness);
 	 Border emptyBorder = BorderFactory.createEmptyBorder();
-	 SquarePanel borderSet;
-	 SquarePanel set ;
+	 SquarePanel whiteFromSet;
+	 SquarePanel whiteToSet;
+	 SquarePanel blackFromSet;
+	 SquarePanel blackToSet;
+	 SquarePanel set;
 	 boolean isSquareSet = false;
 	 Endpoint endpoint;
 
@@ -79,25 +87,23 @@ public class BoardPanel extends JPanel {
 	
 	public void squareClick(SquarePanel clicked){
 		System.out.println();
-		if(!this.isSquareSet){
+		if( !this.isSquareSet ){  // no square is set
 			setSquare(clicked);
 			highlightSquare(clicked);
 			System.out.println("Set");
 		}
-		else if(this.isSquareSet  && clicked.equals(this.set)){
+		else if( this.isSquareSet  && clicked.equals(this.set)){ //set square is re-clicked
 			System.out.println("Reclick");
-			setBorder(clicked);
 			unHighLight(this.set);
 			clearSquare();
 		}
-		else if(this.isSquareSet && !clicked.equals(this.set)){
-			
-		//	MoveSender ms = new MoveSender(endpoint,new Move("USER",this.set,clicked));
-			//ms.execute();
+		else if( this.isSquareSet && !clicked.equals(this.set) ){  // another square is clicked.
 			unHighLight(this.set);
+			unSetBorders();
+			setToBorder(this.set,whiteHightlightTo);
+			setFromBorder(clicked,borderHightlightFrom);
 			clearSquare();
 			System.out.println("CLicked elsewhere");
-			
 		}
 		else{
 			System.out.println("Error");
@@ -105,20 +111,47 @@ public class BoardPanel extends JPanel {
 		
 	}
 	
-	boolean setBorder(SquarePanel s){
-		if(borderSet==null){
-			s.setBorder(boarderHightlight);
-			borderSet = s;
+	
+	boolean setFromBorder(SquarePanel s, Border border){
+		if(borderFromSet==null){
+			s.setBorder(border);
+			borderFromSet = s;
 			return true;
 		}
 		else
 			return false;
 	}
-		
-	void unSetBoarder(){
-		if(borderSet!=null){
-			borderSet.setBorder(emptyBorder);
+	
+	boolean setToBorder(SquarePanel s, Border border){
+		if(borderToSet==null){
+			s.setBorder(border);
+			borderToSet = s;
+			return true;
 		}
+		else
+			return false;
+	}
+	
+	/*
+	boolean setMoveBorder(int fromx, int fromy, int tox, int toy){
+		unSetBorders();
+		return setFromBorder(getSquare(fromx,fromy),fromBorder(tox,toy));
+	}
+	*/
+		
+	void unSetBorders(){
+		if(borderToSet!=null){
+			borderToSet.setBorder(emptyBorder);
+			borderToSet=null;
+		}
+		if(borderFromSet!=null){
+			borderFromSet.setBorder(emptyBorder);
+			borderFromSet = null;
+		}
+	}
+	
+	boolean unSetBorderSquare(SquarePanel unSet){
+		
 	}
 	
 	private boolean setSquare(SquarePanel s){

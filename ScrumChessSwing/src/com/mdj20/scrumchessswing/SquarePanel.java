@@ -55,17 +55,12 @@ public class SquarePanel extends JPanel {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				if(boardPanel.isSquareSet){
-					boardPanel.setBorder((SquarePanel)e.getSource());
-				}
+				
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				if(boardPanel.isSquareSet){
-					
-					
-				}
+				
 			}
 			
 		});
