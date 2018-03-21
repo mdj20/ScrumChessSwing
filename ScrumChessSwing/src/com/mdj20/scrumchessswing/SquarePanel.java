@@ -10,7 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-public class SquarePanel extends JPanel {
+public class SquarePanel extends JPanel implements RankAndFile {
 	int rank;
 	int file;
 	Color normalColor;

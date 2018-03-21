@@ -99,9 +99,6 @@ public class BoardPanel extends JPanel {
 		}
 		else if( this.isSquareSet && !clicked.equals(this.set) ){  // another square is clicked.
 			unHighLight(this.set);
-			unSetBorders();
-			setToBorder(this.set,whiteHightlightTo);
-			setFromBorder(clicked,borderHightlightFrom);
 			clearSquare();
 			System.out.println("CLicked elsewhere");
 		}
@@ -111,48 +108,56 @@ public class BoardPanel extends JPanel {
 		
 	}
 	
+	void setBlackHighlight(RankAndFile from, RankAndFile to) {
+		unsetBlackHighlight();
+		blackToSet = getSquare(from.getRank(),from.getFile());
+		blackFromSet =  getSquare(from.getRank(),from.getFile());
+		setBorder(blackToSet,blacktTo);
+		setBorder(blackFromSet,blackFrom);
+	}
+
 	
-	boolean setFromBorder(SquarePanel s, Border border){
-		if(borderFromSet==null){
-			s.setBorder(border);
-			borderFromSet = s;
-			return true;
+	
+	void setWhiteHighlight(RankAndFile from, RankAndFile to) {
+		unsetWhiteHighlight();
+		whiteToSet = getSquare(from.getRank(),from.getFile());
+		whiteFromSet =  getSquare(from.getRank(),from.getFile());
+		setBorder(whiteToSet,whitetTo);
+		setBorder(whiteFromSet,whiteFrom);
+	}
+	
+	void unsetWhiteHighlight() {
+		if (whiteToSet!= null) {
+			setBorder(whiteToSet,emptyBorder);
+			whiteToSet = null;
 		}
-		else
-			return false;
-	}
-	
-	boolean setToBorder(SquarePanel s, Border border){
-		if(borderToSet==null){
-			s.setBorder(border);
-			borderToSet = s;
-			return true;
+		if(whiteFromSet!=null) {
+			setBorder(whiteFromSet,emptyBorder);
+			whiteFromSet = null;
 		}
-		else
-			return false;
 	}
 	
-	/*
-	boolean setMoveBorder(int fromx, int fromy, int tox, int toy){
-		unSetBorders();
-		return setFromBorder(getSquare(fromx,fromy),fromBorder(tox,toy));
+	void unsetBlackHighlight() {
+		if (blackToSet!= null) {
+			setBorder(blackToSet,emptyBorder);
+			blackToSet = null;
+		}
+		if(blackFromSet!=null) {
+			setBorder(blackFromSet,emptyBorder);
+			blackFromSet = null;
+		}
 	}
-	*/
+	
+	
+	void setBorder(SquarePanel s, Border border){
+		s.setBorder(border);
+	}
+	
+
 		
-	void unSetBorders(){
-		if(borderToSet!=null){
-			borderToSet.setBorder(emptyBorder);
-			borderToSet=null;
-		}
-		if(borderFromSet!=null){
-			borderFromSet.setBorder(emptyBorder);
-			borderFromSet = null;
-		}
-	}
+
 	
-	boolean unSetBorderSquare(SquarePanel unSet){
-		
-	}
+
 	
 	private boolean setSquare(SquarePanel s){
 		boolean ret = false;
