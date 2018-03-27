@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class FenUtility {
 	
 	public static final String STARTING_FEN_SHORT = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
+	public static final String STARTING_FEN_LONG = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 	public static final char[] fileChars = {'a','b','c','d','e','f','g','h'};
 	
 	// parses fen and return true if fen is valid, returns false if it is not.
@@ -31,6 +32,15 @@ public class FenUtility {
 			ret = false;
 		}
 		return ret;
+	}
+	
+	public static String getBoardFenSection(String fen){
+		String split[] = fen.split(" ");
+		if(split[0]!=null && checkFEN(split[0])){
+			return split[0];
+		}
+		else
+			return null;
 	}
 	
 	public static StringBuilder square(int file, int rank, StringBuilder sb){

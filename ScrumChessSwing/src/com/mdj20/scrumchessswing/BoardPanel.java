@@ -153,12 +153,6 @@ public class BoardPanel extends JPanel {
 		s.setBorder(border);
 	}
 	
-
-		
-
-	
-
-	
 	private boolean setSquare(SquarePanel s){
 		boolean ret = false;
 		if (this.isSquareSet == false){
