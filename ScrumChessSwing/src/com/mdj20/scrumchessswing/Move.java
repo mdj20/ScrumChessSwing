@@ -3,13 +3,13 @@ package com.mdj20.scrumchessswing;
 public class Move {
 	
 	String user;
-	Square to;
-	Square from;
+	RankAndFile to;
+	RankAndFile from;
 	
 	Move(String user){
 		this(user,null,null);
 	}
-	Move(String user, Square from, Square to){
+	Move(String user, RankAndFile from, RankAndFile to){
 		this.user = user;
 		this.from = from;
 		this.to= to;
@@ -18,10 +18,10 @@ public class Move {
 	public String getUser() {
 		return user;
 	}
-	public Square getTo() {
+	public RankAndFile getTo() {
 		return to;
 	}
-	public Square getFrom() {
+	public RankAndFile getFrom() {
 		return from;
 	}
 	

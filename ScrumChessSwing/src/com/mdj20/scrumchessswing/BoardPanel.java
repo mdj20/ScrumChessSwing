@@ -58,9 +58,7 @@ public class BoardPanel extends JPanel {
 		}	
 	}
 	
-	private Square bs(int r, int f, Color c){
-		return new Square(r,f,c,this);	
-	}
+
 	
 	public SquarePanel getSquare(int x, int y){
 		return squares[y][x];
