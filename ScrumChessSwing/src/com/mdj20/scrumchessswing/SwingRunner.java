@@ -3,6 +3,7 @@ package com.mdj20.scrumchessswing;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
@@ -31,11 +32,12 @@ public class SwingRunner {
 	
 	private static void initGUI(Endpoint ep){
 		JFrame topLevel = new JFrame();
-		topLevel.setLayout(new BorderLayout());
+		topLevel.setLayout(new FlowLayout());
 		BoardPanel boardPanel = new BoardPanel(ep);
 		topLevel.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//boardPanel.setSize(new Dimension(800,800));
 		topLevel.add(boardPanel);
+		topLevel.add(new InfoPanel());
 		topLevel.pack();
 		topLevel.setVisible(true);
 		List<String> ucodes = Piece.getUnicodeStringsList();
