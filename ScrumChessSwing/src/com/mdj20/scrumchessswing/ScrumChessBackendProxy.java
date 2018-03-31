@@ -9,6 +9,6 @@ import com.scrumchess.userrequests.NewGameResponse;
 
 public interface ScrumChessBackendProxy {
 	public NewGameResponse tryNewGameRequest(NewGameRequest request);
-	public GameInfoResponse tryNewGameRequest(GameInfoRequest request);
+	public GameInfoResponse tryGameInfoRequest(GameInfoRequest request);
 	public MoveRequestResponse tryMoveRequest(MoveRequest moveRequest);
 }

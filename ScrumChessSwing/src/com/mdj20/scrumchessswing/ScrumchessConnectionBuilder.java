@@ -19,11 +19,8 @@ import com.scrumchess.userrequests.MoveRequest;
 import com.scrumchess.userrequests.MoveRequestResponse;
 import com.scrumchess.userrequests.NewGameRequest;
 import com.scrumchess.userrequests.NewGameResponse;
+import com.scrumchess.userrequests.ScrumChessGsonBuilder;
 
-
-/*
- * 
- */
 
 public class ScrumchessConnectionBuilder implements ScrumChessBackendProxy{
 	public static final String defaultPort = "8080";
@@ -31,8 +28,9 @@ public class ScrumchessConnectionBuilder implements ScrumChessBackendProxy{
 	private String port = defaultPort;
 	private String hostString = defaultLocalHostString+port;
 	
-	ScrumchessConnectionBuilder(String hostString){
+	ScrumchessConnectionBuilder(String hostString, int port){
 		this.hostString = hostString;
+		this.port = Integer.toString(port);	
 	}
 	
 	ScrumchessConnectionBuilder(){};
@@ -112,25 +110,79 @@ public class ScrumchessConnectionBuilder implements ScrumChessBackendProxy{
 		System.out.println(response);
 		NewGameResponse ngresponse = gson.fromJson(response, NewGameResponse.class);
 		System.out.println(ngresponse.isSuccessful());
-		System.out.println(ngresponse.getResponseObject().getId());	
+		System.out.println(ngresponse.getResponseObject().getId());
+		
+		
+		NewGameResponse res = scb.tryNewGameRequest(ngrequest);
+		System.out.println(res.isSuccessful()+"\n"+res.getResponseObject().getFen());
+		long gameID = res.getResponseObject().getId();
+		
+		GameInfoRequest infoRequest = new GameInfoRequest(userInfo,gameID);
+		
+		GameInfoResponse gires = scb.tryGameInfoRequest(infoRequest);
 	}
+	
+	private BufferedReader sendJson(HttpURLConnection conn, String json){
+		BufferedReader br=null;
+		byte[] bytes = json.getBytes();
+		int length = bytes.length;
+		conn.setRequestProperty("Content-Length", Integer.toString(length));
 
+		try {
+			conn.getOutputStream().write(bytes);
+			br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return br;
+	}
+	
+	private <T> T constructObject(BufferedReader reader, Class<T> clazz){
+		T ret = null;
+		Gson gson = ScrumChessGsonBuilder.getSCGson();
+		String json = null;
+		try {
+			json = reader.readLine();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		if(json!=null){
+			ret = gson.fromJson(json, clazz);
+		}
+		return ret;
+	}
+	
+	
 	@Override
 	public NewGameResponse tryNewGameRequest(NewGameRequest request) {
 		HttpURLConnection conn = buildScrumchessConnection("/newgamegson");
-		return null;
+		NewGameResponse response= null;
+		Gson gson = new Gson();
+		String json = gson.toJson(request);
+		if(conn!=null){
+			BufferedReader br = sendJson(conn,json);
+			response = constructObject(br,NewGameResponse.class);
+		}
+		return response;
 	}
-
-	@Override
-	public GameInfoResponse tryNewGameRequest(GameInfoRequest request) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 	@Override
 	public MoveRequestResponse tryMoveRequest(MoveRequest moveRequest) {
-		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public GameInfoResponse tryGameInfoRequest(GameInfoRequest request) {
+		HttpURLConnection conn = buildScrumchessConnection("/gameinfogson");
+		GameInfoResponse response = null;
+		Gson gson = new Gson();
+		String json = gson.toJson(request);
+		if(conn!=null){
+			BufferedReader br = sendJson(conn,json);
+			response = constructObject(br,GameInfoResponse.class);
+		}
+		return response;
 	}
 	
 	
