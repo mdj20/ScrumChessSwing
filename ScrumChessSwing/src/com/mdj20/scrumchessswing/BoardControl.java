@@ -20,8 +20,6 @@ public class BoardControl {
 	
 	
 	public void tryMoveWorker(String user, RankAndFile from, RankAndFile to ) {
-		System.out.println("USER BC "+user);
-		
 		Move move = new Move(user,from,to);
 		MoveExecuteWorker worker = new MoveExecuteWorker(this,move);
 		worker.execute();
@@ -32,7 +30,6 @@ public class BoardControl {
 	}
 	
 	public void setBoardPanelUIThread(String fen) {
-		System.out.println("INSIDE: "+fen);
 		String shortFen = FenUtility.getBoardFenSection(fen);
 		if(FenUtility.checkFEN(shortFen)) {
 			SwingUtilities.invokeLater(new BoardSetter(shortFen));

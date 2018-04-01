@@ -20,14 +20,12 @@ public class MoveExecuteWorker extends SwingWorker<Boolean, Void> {
 	
 	@Override
 	protected Boolean doInBackground() throws Exception {
-		System.out.println("Background");
 		GameControl gameControl = boardControl.getGameControl();
 		return gameControl.tryMove(move);
 	}
 	
 	@Override
 	protected void done() {
-		System.out.println("DONE");
 		try {
 			if(get()) {
 				System.out.println(boardControl.getGameControl().getFen());
