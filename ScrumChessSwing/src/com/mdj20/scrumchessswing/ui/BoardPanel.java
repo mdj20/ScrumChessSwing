@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
+import com.mdj20.scrumchessswing.BoardControl;
 import com.mdj20.scrumchessswing.Endpoint;
 import com.mdj20.scrumchessswing.RankAndFile;
 import com.mdj20.scrumchessswing.ajaxswingworkers.MoveSender;
@@ -33,6 +34,7 @@ public class BoardPanel extends JPanel {
 	 boolean isSquareSet = false;
 	 Endpoint endpoint;
 	 Map<String,String> pieceMap;
+	 BoardControl boardControl;
 
 	BoardPanel(Endpoint ep, Map<String,String> pieceMap){
 		setLayout(new GridLayout(8,8));
@@ -43,7 +45,7 @@ public class BoardPanel extends JPanel {
 	
 	private void initSquares(){
 		ArrayList<SquarePanel> squareList = new ArrayList<SquarePanel>();
-		for (int i = 0 ; i < 8 ; i++){
+		for (int i = 7 ; i >= 0 ; i--){
 			for (int j = 0 ; j< 8 ; j++){	
 				if ((i+j)%2==0){
 					SquarePanel s = new SquarePanel(i,j,Color.GRAY, this);
@@ -69,7 +71,7 @@ public class BoardPanel extends JPanel {
 	}
 
 	public void setBoard(String fen){
-		int i=0;
+		int i=7;
 		int j=0;
 		for(char c : fen.toCharArray())	{
 			if(pieceMap.containsKey(Character.toString(c))){
@@ -78,10 +80,16 @@ public class BoardPanel extends JPanel {
 				j++;
 			}
 			else if (Character.isDigit(c)){
+				int l = j+Character.getNumericValue(c);
+				for(int k = j ; k  < l; k++) {
+					JLabel blankLabel = this.getSquare(j,i).getjLabel();
+					blankLabel.setText(pieceMap.get(""));
+				}
 				j+=Character.getNumericValue(c);
+				
 			}
 			else if (c == '/'){
-				i++;
+				i--;
 				j=0;
 			}
 		}
@@ -105,6 +113,7 @@ public class BoardPanel extends JPanel {
 		}
 		else if( this.isSquareSet && !clicked.equals(this.set) ){  // another square is clicked.
 			unHighLight(this.set);
+			this.boardControl.tryMoveWorker("test", this.set,clicked);
 			clearSquare();
 			System.out.println("CLicked elsewhere");
 		}
@@ -179,6 +188,9 @@ public class BoardPanel extends JPanel {
 		s.setBackground(s.getNormalColor());
 	}
 	
+	public void setBoardControl(BoardControl bc) {
+		this.boardControl = bc;
+	}
 	
 	
 	

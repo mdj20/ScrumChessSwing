@@ -18,6 +18,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 
+import com.mdj20.scrumchessswing.BoardControl;
 import com.mdj20.scrumchessswing.Endpoint;
 import com.mdj20.scrumchessswing.Piece;
 
@@ -39,6 +40,8 @@ public class SwingRunner {
 		topLevel.setLayout(new GridBagLayout());
 		BoardPanel boardPanel = new BoardPanel(ep,Piece.getPieceKeyMap());
 		topLevel.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		BoardControl boardControl = new BoardControl(boardPanel);
+		boardPanel.setBoardControl(boardControl);
 		//boardPanel.setSize(new Dimension(800,800));
 		topLevel.add(boardPanel,boardConstraints());
 		InfoPanel info = new InfoPanel();

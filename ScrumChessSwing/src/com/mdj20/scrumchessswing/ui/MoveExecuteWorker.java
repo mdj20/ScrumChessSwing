@@ -13,21 +13,24 @@ public class MoveExecuteWorker extends SwingWorker<Boolean, Void> {
 	BoardControl boardControl;
 	Move move;
 	
-	MoveExecuteWorker(BoardControl boardControl, Move move){
+	public MoveExecuteWorker(BoardControl boardControl, Move move){
 		this.boardControl = boardControl;
 		this.move = move;
 	}
 	
 	@Override
 	protected Boolean doInBackground() throws Exception {
+		System.out.println("Background");
 		GameControl gameControl = boardControl.getGameControl();
 		return gameControl.tryMove(move);
 	}
 	
 	@Override
 	protected void done() {
+		System.out.println("DONE");
 		try {
 			if(get()) {
+				System.out.println(boardControl.getGameControl().getFen());
 				boardControl.setBoardPanelUIThread(boardControl.getGameControl().getFen());
 			}
 		} catch (InterruptedException e) {

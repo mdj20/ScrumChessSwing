@@ -25,6 +25,7 @@ public class GameControl {
 		String an = FenUtility.move(from, to);
 		System.out.println(an);
 		if(moveValidator.setAndDoMove(an)) {
+			System.out.println("MOVE SUCCESS!!!!!!!!!!!!");
 			ret = true;
 			moveHistory.add(move);
 		}

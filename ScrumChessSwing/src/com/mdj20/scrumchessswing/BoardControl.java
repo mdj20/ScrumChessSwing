@@ -3,13 +3,14 @@ package com.mdj20.scrumchessswing;
 import javax.swing.SwingUtilities;
 
 import com.mdj20.scrumchessswing.ui.BoardPanel;
+import com.mdj20.scrumchessswing.ui.MoveExecuteWorker;
 import com.scrumchess.gamelogic.MoveValidator;
 
 public class BoardControl {
 	BoardPanel boardPanel;
 	GameControl gameControl = new GameControl();
 	
-	BoardControl(BoardPanel bPanel){
+	public BoardControl(BoardPanel bPanel){
 		boardPanel = bPanel;
 	}
 	
@@ -18,8 +19,12 @@ public class BoardControl {
 	}
 	
 	
-	public boolean tryMoveWorker(RankAndFile from, RankAndFile to ) {
+	public void tryMoveWorker(String user, RankAndFile from, RankAndFile to ) {
+		System.out.println("USER BC "+user);
 		
+		Move move = new Move(user,from,to);
+		MoveExecuteWorker worker = new MoveExecuteWorker(this,move);
+		worker.execute();
 	}
 	
 	public GameControl getGameControl() {
@@ -27,6 +32,7 @@ public class BoardControl {
 	}
 	
 	public void setBoardPanelUIThread(String fen) {
+		System.out.println("INSIDE: "+fen);
 		String shortFen = FenUtility.getBoardFenSection(fen);
 		if(FenUtility.checkFEN(shortFen)) {
 			SwingUtilities.invokeLater(new BoardSetter(shortFen));
