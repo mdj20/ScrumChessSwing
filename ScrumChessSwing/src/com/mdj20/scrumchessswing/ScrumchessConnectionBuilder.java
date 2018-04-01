@@ -116,9 +116,7 @@ public class ScrumchessConnectionBuilder implements ScrumChessBackendProxy{
 		NewGameResponse res = scb.tryNewGameRequest(ngrequest);
 		System.out.println(res.isSuccessful()+"\n"+res.getResponseObject().getFen());
 		long gameID = res.getResponseObject().getId();
-		
 		GameInfoRequest infoRequest = new GameInfoRequest(userInfo,gameID);
-		
 		GameInfoResponse gires = scb.tryGameInfoRequest(infoRequest);
 	}
 	

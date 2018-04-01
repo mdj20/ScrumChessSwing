@@ -12,7 +12,7 @@ public class Endpoint implements Runnable {
 	private boolean running;
 	
 	
-	Endpoint(){
+	public Endpoint(){
 		userMoves = new LinkedBlockingQueue<Move>();
 	}
 	

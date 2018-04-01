@@ -1,4 +1,4 @@
-package com.mdj20.scrumchessswing;
+package com.mdj20.scrumchessswing.ui;
 
 import java.awt.Color;
 import java.awt.GridLayout;
@@ -11,6 +11,8 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
+import com.mdj20.scrumchessswing.Endpoint;
+import com.mdj20.scrumchessswing.RankAndFile;
 import com.mdj20.scrumchessswing.ajaxswingworkers.MoveSender;
 
 public class BoardPanel extends JPanel {
@@ -30,9 +32,11 @@ public class BoardPanel extends JPanel {
 	 SquarePanel set;
 	 boolean isSquareSet = false;
 	 Endpoint endpoint;
+	 Map<String,String> pieceMap;
 
-	BoardPanel(Endpoint ep){
+	BoardPanel(Endpoint ep, Map<String,String> pieceMap){
 		setLayout(new GridLayout(8,8));
+		this.pieceMap = pieceMap;
 		initSquares();
 		this.endpoint = ep;
 	}
@@ -64,7 +68,7 @@ public class BoardPanel extends JPanel {
 		return squares[y][x];
 	}
 
-	public void setBoard(String fen, Map<String,String> pieceMap){
+	public void setBoard(String fen){
 		int i=0;
 		int j=0;
 		for(char c : fen.toCharArray())	{
@@ -81,6 +85,10 @@ public class BoardPanel extends JPanel {
 				j=0;
 			}
 		}
+	}
+	
+	public void setPieceMap(Map<String,String> map) {
+		this.pieceMap = map;
 	}
 	
 	public void squareClick(SquarePanel clicked){
