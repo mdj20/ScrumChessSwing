@@ -44,7 +44,7 @@ public class FenUtility {
 	}
 	
 	public static StringBuilder square(int file, int rank, StringBuilder sb){
-		if (file >7 || file <0 || rank >7 || rank < 0 ){
+		if (file > 7 || file < 0 || rank >7 || rank < 0 ){
 			throw new IllegalArgumentException("Both rank and file must be values x : -1< x < 8");
 		}
 		sb.append(fileChars[file]);
@@ -60,6 +60,10 @@ public class FenUtility {
 		StringBuilder sb = new StringBuilder();
 		sb = square(file0,rank0,sb);
 		return square(file1,rank1,sb).toString();
+	}
+	
+	public static String move(RankAndFile from, RankAndFile to) {
+		return move(from.getFile(),from.getRank(),to.getFile(),to.getRank());
 	}
 	
 	//Smoketest

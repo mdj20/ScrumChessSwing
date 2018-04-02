@@ -1,4 +1,4 @@
-package com.mdj20.scrumchessswing;
+package com.mdj20.scrumchessswing.ui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -10,6 +10,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import com.mdj20.scrumchessswing.RankAndFile;
+
 public class SquarePanel extends JPanel implements RankAndFile {
 	int rank;
 	int file;
@@ -18,7 +20,7 @@ public class SquarePanel extends JPanel implements RankAndFile {
 	int defaultSize = 100;
 	BoardPanel boardPanel;
 
-	SquarePanel(int rank, int file, Color backGround, BoardPanel boardPanel){
+	public SquarePanel(int rank, int file, Color backGround, BoardPanel boardPanel){
 		this.rank = rank;
 		this.file = file;
 		this.normalColor = backGround;

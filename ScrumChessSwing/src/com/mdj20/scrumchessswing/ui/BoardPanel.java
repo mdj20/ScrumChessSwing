@@ -1,4 +1,4 @@
-package com.mdj20.scrumchessswing;
+package com.mdj20.scrumchessswing.ui;
 
 import java.awt.Color;
 import java.awt.GridLayout;
@@ -11,35 +11,46 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
+import com.mdj20.scrumchessswing.BoardControl;
+import com.mdj20.scrumchessswing.Endpoint;
+import com.mdj20.scrumchessswing.RankAndFile;
 import com.mdj20.scrumchessswing.ajaxswingworkers.MoveSender;
 
 public class BoardPanel extends JPanel {
 	
-	 SquarePanel squares[][] = new SquarePanel[8][8];
-	 Color highlight = Color.YELLOW;
-	 int borderThickness = 6;
-	 Border whiteFrom = BorderFactory.createLineBorder(Color.RED, borderThickness);
-	 Border whitetTo = BorderFactory.createLineBorder(Color.BLUE, borderThickness);
-	 Border blackFrom = BorderFactory.createLineBorder(Color.GREEN, borderThickness);
-	 Border blacktTo = BorderFactory.createLineBorder(Color.ORANGE, borderThickness);
-	 Border emptyBorder = BorderFactory.createEmptyBorder();
-	 SquarePanel whiteFromSet;
-	 SquarePanel whiteToSet;
-	 SquarePanel blackFromSet;
-	 SquarePanel blackToSet;
-	 SquarePanel set;
-	 boolean isSquareSet = false;
-	 Endpoint endpoint;
+	 /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1891085852783069906L;
+	
+	SquarePanel squares[][] = new SquarePanel[8][8];
+	Color highlight = Color.YELLOW;
+	int borderThickness = 6;
+	Border whiteFrom = BorderFactory.createLineBorder(Color.RED, borderThickness);
+	Border whitetTo = BorderFactory.createLineBorder(Color.BLUE, borderThickness);
+	Border blackFrom = BorderFactory.createLineBorder(Color.GREEN, borderThickness);
+	Border blacktTo = BorderFactory.createLineBorder(Color.ORANGE, borderThickness);
+	Border emptyBorder = BorderFactory.createEmptyBorder();
+	SquarePanel whiteFromSet;
+	SquarePanel whiteToSet;
+	SquarePanel blackFromSet;
+	SquarePanel blackToSet;
+	SquarePanel set;
+	boolean isSquareSet = false;
+	Endpoint endpoint;
+	Map<String,String> pieceMap;
+	BoardControl boardControl;
 
-	BoardPanel(Endpoint ep){
+	BoardPanel(Endpoint ep, Map<String,String> pieceMap){
 		setLayout(new GridLayout(8,8));
+		this.pieceMap = pieceMap;
 		initSquares();
 		this.endpoint = ep;
 	}
 	
 	private void initSquares(){
 		ArrayList<SquarePanel> squareList = new ArrayList<SquarePanel>();
-		for (int i = 0 ; i < 8 ; i++){
+		for (int i = 7 ; i >= 0 ; i--){
 			for (int j = 0 ; j< 8 ; j++){	
 				if ((i+j)%2==0){
 					SquarePanel s = new SquarePanel(i,j,Color.GRAY, this);
@@ -58,14 +69,12 @@ public class BoardPanel extends JPanel {
 		}	
 	}
 	
-
-	
 	public SquarePanel getSquare(int x, int y){
 		return squares[y][x];
 	}
 
-	public void setBoard(String fen, Map<String,String> pieceMap){
-		int i=0;
+	public void setBoard(String fen){
+		int i=7;
 		int j=0;
 		for(char c : fen.toCharArray())	{
 			if(pieceMap.containsKey(Character.toString(c))){
@@ -74,13 +83,23 @@ public class BoardPanel extends JPanel {
 				j++;
 			}
 			else if (Character.isDigit(c)){
+				int l = j+Character.getNumericValue(c);
+				for(int k = j ; k < l; k++) {
+					JLabel blankLabel = this.getSquare(j,i).getjLabel();
+					blankLabel.setText(pieceMap.get(""));
+				}
 				j+=Character.getNumericValue(c);
+				
 			}
 			else if (c == '/'){
-				i++;
+				i--;
 				j=0;
 			}
 		}
+	}
+	
+	public void setPieceMap(Map<String,String> map) {
+		this.pieceMap = map;
 	}
 	
 	public void squareClick(SquarePanel clicked){
@@ -97,13 +116,13 @@ public class BoardPanel extends JPanel {
 		}
 		else if( this.isSquareSet && !clicked.equals(this.set) ){  // another square is clicked.
 			unHighLight(this.set);
+			this.boardControl.tryMoveWorker("test", this.set,clicked);
 			clearSquare();
 			System.out.println("CLicked elsewhere");
 		}
 		else{
 			System.out.println("Error");
 		}
-		
 	}
 	
 	void setBlackHighlight(RankAndFile from, RankAndFile to) {
@@ -114,8 +133,6 @@ public class BoardPanel extends JPanel {
 		setBorder(blackFromSet,blackFrom);
 	}
 
-	
-	
 	void setWhiteHighlight(RankAndFile from, RankAndFile to) {
 		unsetWhiteHighlight();
 		whiteToSet = getSquare(from.getRank(),from.getFile());
@@ -171,6 +188,9 @@ public class BoardPanel extends JPanel {
 		s.setBackground(s.getNormalColor());
 	}
 	
+	public void setBoardControl(BoardControl bc) {
+		this.boardControl = bc;
+	}
 	
 	
 	

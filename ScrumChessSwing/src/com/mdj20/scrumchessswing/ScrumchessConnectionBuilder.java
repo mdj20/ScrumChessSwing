@@ -116,16 +116,12 @@ public class ScrumchessConnectionBuilder implements ScrumChessBackendProxy{
 		NewGameResponse res = scb.tryNewGameRequest(ngrequest);
 		System.out.println(res.isSuccessful()+"\n"+res.getResponseObject().getFen());
 		long gameID = res.getResponseObject().getId();
-		
 		MoveRequest move = new MoveRequest(userInfo,gameID,"e2e4");
 		
 		MoveRequestResponse moveres = scb.tryMoveRequest(move);
 		
 		GameInfoRequest infoRequest = new GameInfoRequest(userInfo,gameID);
-		
 		GameInfoResponse gires = scb.tryGameInfoRequest(infoRequest);
-		System.out.println(gires.isSuccessful()+"\n"+res.getResponseObject().getFen());
-		
 	}
 	
 	private BufferedReader sendJson(HttpURLConnection conn, String json){
@@ -175,15 +171,7 @@ public class ScrumchessConnectionBuilder implements ScrumChessBackendProxy{
 
 	@Override
 	public MoveRequestResponse tryMoveRequest(MoveRequest moveRequest) {
-		HttpURLConnection conn = buildScrumchessConnection("/movegson");
-		MoveRequestResponse response= null;
-		Gson gson = new Gson();
-		String json = gson.toJson(moveRequest);
-		if(conn!=null){
-			BufferedReader br = sendJson(conn,json);
-			response = constructObject(br,MoveRequestResponse.class);
-		}
-		return response;
+		return null;
 	}
 
 	@Override

@@ -21,6 +21,7 @@ public class Piece {
 	public static final String  BISHOP_WHITE_STRING = "B";
 	public static final String  KNIGHT_WHITE_STRING = "N";
 	public static final String  PAWN_WHITE_STRING = "P";
+	public static final String  EMPTY_SPACE_STRING = "";
 	
 	public static final String KING_WHITE_UCODE = "\u2654";
 	public static final String QUEEN_WHITE_UCODE = "\u2655";
@@ -34,6 +35,7 @@ public class Piece {
 	public static final String BISHOP_BLACK_UCODE = "\u265D";
 	public static final String KNIGHT_BLACK_UCODE = "\u265E";
 	public static final String PAWN_BLACK_UCODE = "\u265F";
+
 	
 	public static List<String> getUnicodeStringsList(){
 		ArrayList<String> list = new ArrayList<String>();
@@ -58,6 +60,7 @@ public class Piece {
 		map.put(KNIGHT_WHITE_STRING, KNIGHT_WHITE_UCODE);
 		map.put(ROOK_WHITE_STRING, ROOK_WHITE_UCODE);
 		map.put(PAWN_WHITE_STRING, PAWN_WHITE_UCODE);
+		map.put(EMPTY_SPACE_STRING,EMPTY_SPACE_STRING);
 		return map;
 	}
 }
