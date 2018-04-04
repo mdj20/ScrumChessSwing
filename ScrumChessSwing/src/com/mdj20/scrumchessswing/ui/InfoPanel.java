@@ -2,12 +2,14 @@ package com.mdj20.scrumchessswing.ui;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.JPanel;
 
 public class InfoPanel extends JPanel {
 
 	private String user1;
 	private String user2;
+	private long gameId = 0;
 	
 	JButton buttons[] ;
 	JButton jButton0 = new JButton("Button 0");
@@ -25,9 +27,20 @@ public class InfoPanel extends JPanel {
 		this.add(userName2TextBox);
 		createButtons(5);
 		addButtons(buttons);
-	
+		GameIdInputBox gameBox = new GameIdInputBox(this);
+		//JFormattedTextField gameBox = new JFormattedTextField();
+		//gameBox.setFormatter(GameIdInputBox.buildLongFormatter());
+		this.add(gameBox);
 	}
 	
+	public long getGameId() {
+		return gameId;
+	}
+
+	public void setGameId(long gameId) {
+		this.gameId = gameId;
+	}
+
 	private void addButtons(JButton but[]) {
 		for(JButton jb: but) {
 			this.add(jb);

@@ -11,6 +11,7 @@ public class GameControl {
 	ArrayList<Move> moveHistory = new ArrayList<Move>();
 	
 	
+	
 	GameControl(){
 		this(FenUtility.STARTING_FEN_LONG);
 	}

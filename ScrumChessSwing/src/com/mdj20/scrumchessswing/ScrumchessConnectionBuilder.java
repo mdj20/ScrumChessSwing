@@ -13,16 +13,24 @@ import com.google.gson.Gson;
 import com.scrumchess.authentication.ScrumchessAuthenticationType;
 import com.scrumchess.authentication.SimpleUserAuthenticationInfo;
 import com.scrumchess.authentication.SimpleUserCredentials;
+import com.scrumchess.userrequests.AIRequest;
+import com.scrumchess.userrequests.AIResponse;
+import com.scrumchess.userrequests.DoubleMoveRequest;
+import com.scrumchess.userrequests.DoubleMoveResponse;
 import com.scrumchess.userrequests.GameInfoRequest;
 import com.scrumchess.userrequests.GameInfoResponse;
+import com.scrumchess.userrequests.GameLoadRequest;
+import com.scrumchess.userrequests.GameLoadResponse;
 import com.scrumchess.userrequests.MoveRequest;
 import com.scrumchess.userrequests.MoveRequestResponse;
 import com.scrumchess.userrequests.NewGameRequest;
 import com.scrumchess.userrequests.NewGameResponse;
+import com.scrumchess.userrequests.ScrumChessBackendProxy;
 import com.scrumchess.userrequests.ScrumChessGsonBuilder;
+import com.scrumchess.userrequests.UserRequestHandler;
 
 
-public class ScrumchessConnectionBuilder implements ScrumChessBackendProxy{
+public class ScrumchessConnectionBuilder implements UserRequestHandler{
 	public static final String defaultPort = "8080";
 	public static final String defaultLocalHostString = "http://localhost:";
 	private String port = defaultPort;
@@ -171,7 +179,15 @@ public class ScrumchessConnectionBuilder implements ScrumChessBackendProxy{
 
 	@Override
 	public MoveRequestResponse tryMoveRequest(MoveRequest moveRequest) {
-		return null;
+		HttpURLConnection conn = buildScrumchessConnection("/movegson");
+		MoveRequestResponse response = null;
+		Gson gson = new Gson();
+		String json = gson.toJson(moveRequest);
+		if(conn!=null){
+			BufferedReader br = sendJson(conn,json);
+			response = constructObject(br,MoveRequestResponse.class);
+		}
+		return response;
 	}
 
 	@Override
@@ -185,6 +201,24 @@ public class ScrumchessConnectionBuilder implements ScrumChessBackendProxy{
 			response = constructObject(br,GameInfoResponse.class);
 		}
 		return response;
+	}
+
+	@Override
+	public GameLoadResponse tryGameLoadRequest(GameLoadRequest gameLoadRequest) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public DoubleMoveResponse tryDoubleMoveRequest(DoubleMoveRequest doubleMoveRequest) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public AIResponse tryAIrequest(AIRequest aiRequest) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	
