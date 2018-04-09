@@ -25,7 +25,6 @@ import com.scrumchess.userrequests.MoveRequest;
 import com.scrumchess.userrequests.MoveRequestResponse;
 import com.scrumchess.userrequests.NewGameRequest;
 import com.scrumchess.userrequests.NewGameResponse;
-import com.scrumchess.userrequests.ScrumChessBackendProxy;
 import com.scrumchess.userrequests.ScrumChessGsonBuilder;
 import com.scrumchess.userrequests.UserRequestHandler;
 
@@ -220,10 +219,4 @@ public class ScrumchessConnectionBuilder implements UserRequestHandler{
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	
-	
-	
-	
-	
 }

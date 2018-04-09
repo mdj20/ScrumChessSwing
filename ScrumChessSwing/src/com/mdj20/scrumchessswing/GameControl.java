@@ -3,7 +3,9 @@ package com.mdj20.scrumchessswing;
 import java.util.ArrayList;
 
 import com.mdj20.scrumchessswing.ui.SquarePanel;
+import com.scrumchess.gamelogic.FenUtility;
 import com.scrumchess.gamelogic.MoveValidator;
+import com.scrumchess.gamelogic.RankAndFile;
 
 public class GameControl {
 	

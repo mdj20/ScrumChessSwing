@@ -10,7 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import com.mdj20.scrumchessswing.RankAndFile;
+import com.scrumchess.gamelogic.RankAndFile;
 
 public class SquarePanel extends JPanel implements RankAndFile {
 	int rank;

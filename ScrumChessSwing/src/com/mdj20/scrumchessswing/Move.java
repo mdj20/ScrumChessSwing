@@ -1,5 +1,7 @@
 package com.mdj20.scrumchessswing;
 
+import com.scrumchess.gamelogic.RankAndFile;
+
 public class Move {
 	
 	String user;

@@ -4,7 +4,9 @@ import javax.swing.SwingUtilities;
 
 import com.mdj20.scrumchessswing.ui.BoardPanel;
 import com.mdj20.scrumchessswing.ui.MoveExecuteWorker;
+import com.scrumchess.gamelogic.FenUtility;
 import com.scrumchess.gamelogic.MoveValidator;
+import com.scrumchess.gamelogic.RankAndFile;
 
 public class BoardControl {
 	BoardPanel boardPanel;
