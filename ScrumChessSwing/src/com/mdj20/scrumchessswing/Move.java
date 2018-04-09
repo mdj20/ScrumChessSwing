@@ -1,8 +1,10 @@
 package com.mdj20.scrumchessswing;
 
+import com.scrumchess.gamelogic.AlgebraicNotation;
+import com.scrumchess.gamelogic.FenUtility;
 import com.scrumchess.gamelogic.RankAndFile;
 
-public class Move {
+public class Move implements AlgebraicNotation {
 	
 	String user;
 	RankAndFile to;
@@ -38,5 +40,9 @@ public class Move {
 	}
 	public int getToFile(){
 		return to.getFile();
+	}
+	@Override
+	public String getAlabraicNotation() {
+		return FenUtility.move(getFrom(), getTo());
 	}
 }

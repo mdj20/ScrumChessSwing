@@ -204,8 +204,15 @@ public class ScrumchessConnectionBuilder implements UserRequestHandler{
 
 	@Override
 	public GameLoadResponse tryGameLoadRequest(GameLoadRequest gameLoadRequest) {
-		// TODO Auto-generated method stub
-		return null;
+		HttpURLConnection conn = buildScrumchessConnection("/gameloadgson");
+		GameLoadResponse response = null;
+		Gson gson = new Gson();
+		String json = gson.toJson(gameLoadRequest);
+		if(conn!=null){
+			BufferedReader br = sendJson(conn,json);
+			response = constructObject(br,GameLoadResponse.class);
+		}
+		return response;
 	}
 
 	@Override
