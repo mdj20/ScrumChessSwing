@@ -14,12 +14,12 @@ public class UserNameTextBox extends JTextField {
 	 * 
 	 */
 	
-	InfoPanel infoPanel;
+	MainInfoPanel mainInfoPanel;
 	
 	private static final long serialVersionUID = 7095685074397904505L;
 	
-	public UserNameTextBox(InfoPanel infoPanel) {
-		this.infoPanel = infoPanel;
+	public UserNameTextBox(MainInfoPanel mainInfoPanel) {
+		this.mainInfoPanel = mainInfoPanel;
 		defaultKeyListener();
 	}
 	
@@ -37,8 +37,7 @@ public class UserNameTextBox extends JTextField {
 					JTextField box = (JTextField) e.getSource(); 
 					if(e.getKeyCode()==KeyEvent.VK_ENTER) {
 						if(box.getText().length()>0) {
-							infoPanel.setUser1(box.getText());
-							infoPanel.requestFocus();
+							mainInfoPanel.requestFocus();
 						}
 						
 					}

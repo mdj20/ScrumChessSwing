@@ -1,73 +1,17 @@
 package com.mdj20.scrumchessswing.ui;
 
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JFormattedTextField;
-import javax.swing.JPanel;
+public interface InfoPanel {
 
-public class InfoPanel extends JPanel {
+	long getGameId();
 
-	private String user1;
-	private String user2;
-	private long gameId = 0;
-	
-	JButton buttons[] ;
-	JButton jButton0 = new JButton("Button 0");
-	JButton jButton1 = new JButton("Button 1");
-	JButton jButton2 = new JButton("Button 2");
-	JButton jButton3 = new JButton("Button 3");
-	JButton jButton4 = new JButton("Button 4");
-	
-	UserNameTextBox userNameTextBox = new UserNameTextBox(this);
-	UserName2TextBox userName2TextBox = new UserName2TextBox(this);
-	
-	InfoPanel(){
-		this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
-		this.add(userNameTextBox);
-		this.add(userName2TextBox);
-		createButtons(5);
-		addButtons(buttons);
-		GameIdInputBox gameBox = new GameIdInputBox(this);
-		//JFormattedTextField gameBox = new JFormattedTextField();
-		//gameBox.setFormatter(GameIdInputBox.buildLongFormatter());
-		this.add(gameBox);
-	}
-	
-	public long getGameId() {
-		return gameId;
-	}
+	void setGameId(long gameId);
 
-	public void setGameId(long gameId) {
-		this.gameId = gameId;
-	}
+	String getUser1();
 
-	private void addButtons(JButton but[]) {
-		for(JButton jb: but) {
-			this.add(jb);
-		}
-	}
-	
-	private void createButtons(int n) {
-		buttons = new JButton[n];
-		for(int i = 0 ; i< n ; i++) {
-			buttons[i] = new JButton("Button "+i);
-		}	
-	}
-	public String getUser1() {
-		return user1;
-	}
+	void setUser1(String user1);
 
-	public void setUser1(String user1) {
-		this.user1 = user1;
-		System.out.println("user1: "+user1);
-	}
+	String getUser2();
 
-	public String getUser2() {
-		return user2;
-	}
+	void setUser2(String user2);
 
-	public void setUser2(String user2) {
-		this.user2 = user2;
-		System.out.println("user2: "+user2);
-	}
 }

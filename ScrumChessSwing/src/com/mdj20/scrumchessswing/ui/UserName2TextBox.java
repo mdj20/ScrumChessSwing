@@ -7,10 +7,10 @@ import javax.swing.JTextField;
 
 public class UserName2TextBox extends JTextField{
 
-	InfoPanel infoPanel;
+	MainInfoPanel mainInfoPanel;
 	
-	public UserName2TextBox(InfoPanel infoPanel) {
-		this.infoPanel = infoPanel;
+	public UserName2TextBox(MainInfoPanel mainInfoPanel) {
+		this.mainInfoPanel = mainInfoPanel;
 		defaultKeyListener();
 	}
 	
@@ -28,8 +28,7 @@ public class UserName2TextBox extends JTextField{
 					JTextField box = (JTextField) e.getSource(); 
 					if(e.getKeyCode()==KeyEvent.VK_ENTER) {
 						if(box.getText().length()>0) {
-							infoPanel.setUser2(box.getText());
-							infoPanel.requestFocus();
+							mainInfoPanel.requestFocus();
 						}
 						
 					}

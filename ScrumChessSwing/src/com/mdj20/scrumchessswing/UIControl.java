@@ -3,21 +3,32 @@ package com.mdj20.scrumchessswing;
 import javax.swing.SwingUtilities;
 
 import com.mdj20.scrumchessswing.ui.BoardPanel;
+import com.mdj20.scrumchessswing.ui.InfoPanel;
 import com.mdj20.scrumchessswing.ui.MoveExecuteWorker;
 import com.scrumchess.gamelogic.FenUtility;
 import com.scrumchess.gamelogic.MoveValidator;
 import com.scrumchess.gamelogic.RankAndFile;
 
-public class BoardControl {
+public class UIControl implements InfoPanel{
 	BoardPanel boardPanel;
+	InfoPanel mainInfoPanel;
 	GameControl gameControl = new GameControl();
 	
-	public BoardControl(BoardPanel bPanel){
-		boardPanel = bPanel;
+	public UIControl(BoardPanel bPanel, InfoPanel iPanel){
+		this.boardPanel = bPanel;
+		this.mainInfoPanel = iPanel;
 	}
 	
 	public void setFromFen(String fen){
 		gameControl = new GameControl(fen);
+	}
+	
+	public long getGameId() {
+		return mainInfoPanel.getGameId();
+	}
+	
+	public void setGameId(long id) {
+		mainInfoPanel.setGameId(id);
 	}
 	
 	
@@ -59,6 +70,25 @@ public class BoardControl {
 			boardPanel.setBoard(config);
 		}	
 	}
-	
-	
+
+	@Override
+	public String getUser1() {
+		return mainInfoPanel.getUser1();
+	}
+
+	@Override
+	public void setUser1(String user1) {
+		mainInfoPanel.setUser1(user1);
+		
+	}
+
+	@Override
+	public String getUser2() {
+		return mainInfoPanel.getUser2();
+	}
+
+	@Override
+	public void setUser2(String user2) {
+		mainInfoPanel.setUser2(user2);	
+	}
 }

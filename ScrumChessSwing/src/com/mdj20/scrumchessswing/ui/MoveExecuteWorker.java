@@ -4,23 +4,23 @@ import java.util.concurrent.ExecutionException;
 
 import javax.swing.SwingWorker;
 
-import com.mdj20.scrumchessswing.BoardControl;
+import com.mdj20.scrumchessswing.UIControl;
 import com.mdj20.scrumchessswing.GameControl;
 import com.mdj20.scrumchessswing.Move;
 
 public class MoveExecuteWorker extends SwingWorker<Boolean, Void> {
 
-	BoardControl boardControl;
+	UIControl uIControl;
 	Move move;
 	
-	public MoveExecuteWorker(BoardControl boardControl, Move move){
-		this.boardControl = boardControl;
+	public MoveExecuteWorker(UIControl uIControl, Move move){
+		this.uIControl = uIControl;
 		this.move = move;
 	}
 	
 	@Override
 	protected Boolean doInBackground() throws Exception {
-		GameControl gameControl = boardControl.getGameControl();
+		GameControl gameControl = uIControl.getGameControl();
 		return gameControl.tryMove(move);
 	}
 	
@@ -28,8 +28,8 @@ public class MoveExecuteWorker extends SwingWorker<Boolean, Void> {
 	protected void done() {
 		try {
 			if(get()) {
-				System.out.println(boardControl.getGameControl().getFen());
-				boardControl.setBoardPanelUIThread(boardControl.getGameControl().getFen());
+				System.out.println(uIControl.getGameControl().getFen());
+				uIControl.setBoardPanelUIThread(uIControl.getGameControl().getShortFen());
 			}
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block

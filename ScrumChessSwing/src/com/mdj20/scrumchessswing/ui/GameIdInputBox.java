@@ -11,16 +11,16 @@ import javax.swing.text.NumberFormatter;
 public class GameIdInputBox extends JFormattedTextField {
 	
 	NumberFormatter formatter = new NumberFormatter();
-	InfoPanel infoPanel;
+	MainInfoPanel mainInfoPanel;
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 5303331757078319524L;
 
-	GameIdInputBox(InfoPanel infoPanel){
+	GameIdInputBox(MainInfoPanel mainInfoPanel){
 		super(buildLongFormatter());
-		this.infoPanel = infoPanel;
+		this.mainInfoPanel = mainInfoPanel;
 		defaultKeyListener();
 	}
 	
@@ -52,9 +52,7 @@ public class GameIdInputBox extends JFormattedTextField {
 					JTextField box = (JTextField) e.getSource(); 
 					if(e.getKeyCode()==KeyEvent.VK_ENTER) {
 						if(box.getText().length()>0) {
-							infoPanel.setGameId(Long.parseLong(box.getText()));
-							System.out.println(infoPanel.getGameId());
-							infoPanel.requestFocus();
+							mainInfoPanel.requestFocus();
 						}
 						
 					}
