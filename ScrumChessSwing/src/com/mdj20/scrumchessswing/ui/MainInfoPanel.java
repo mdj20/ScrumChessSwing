@@ -7,6 +7,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JPanel;
+import javax.swing.JSpinner;
 import javax.swing.SwingUtilities;
 
 import com.mdj20.scrumchessswing.UIControl;
@@ -19,7 +20,8 @@ public class MainInfoPanel extends JPanel implements InfoPanel {
 	private UIControl uIControl;
 	
 	JButton buttons[] ;
-	JButton jButton0 = new JButton("NEW GAME BACK");
+	JSpinner gameConfigSpinner = new JSpinner() ; 
+	JButton newGameButton = new JButton("NEW GAME BACK");
 	JButton jButton1 = new JButton("Button 1");
 	JButton jButton2 = new JButton("Button 2");
 	JButton jButton3 = new JButton("Button 3");
