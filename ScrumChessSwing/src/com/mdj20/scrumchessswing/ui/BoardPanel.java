@@ -13,7 +13,6 @@ import javax.swing.border.LineBorder;
 
 import com.mdj20.scrumchessswing.UIControl;
 import com.mdj20.scrumchessswing.Endpoint;
-import com.mdj20.scrumchessswing.ajaxswingworkers.MoveSender;
 import com.scrumchess.gamelogic.RankAndFile;
 
 public class BoardPanel extends JPanel {
