@@ -82,9 +82,12 @@ public class MainInfoPanel extends JPanel implements InfoPanel {
 			buttons[i] = new JButton("Button "+i);
 		}	
 	}
+	
+	
 	/* (non-Javadoc)
 	 * @see com.mdj20.scrumchessswing.ui.InfoPanel#getUser1()
 	 */
+	
 	@Override
 	public String getUser1() {
 		return userNameTextBox.getText();
@@ -93,6 +96,7 @@ public class MainInfoPanel extends JPanel implements InfoPanel {
 	/* (non-Javadoc)
 	 * @see com.mdj20.scrumchessswing.ui.InfoPanel#setUser1(java.lang.String)
 	 */
+	
 	@Override
 	public void setUser1(final String user1) {
 		Runnable r = new Runnable() {
@@ -107,6 +111,7 @@ public class MainInfoPanel extends JPanel implements InfoPanel {
 	/* (non-Javadoc)
 	 * @see com.mdj20.scrumchessswing.ui.InfoPanel#getUser2()
 	 */
+	
 	@Override
 	public String getUser2() {
 		return userName2TextBox.getText();
@@ -115,6 +120,7 @@ public class MainInfoPanel extends JPanel implements InfoPanel {
 	/* (non-Javadoc)
 	 * @see com.mdj20.scrumchessswing.ui.InfoPanel#setUser2(java.lang.String)
 	 */
+	
 	@Override
 	public void setUser2(final String user2) {
 		Runnable r = new Runnable() {
