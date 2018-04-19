@@ -5,6 +5,9 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class AsynchronousTracker<K>  {
+	
+	private long waitingStart = 0;
+	private int nQueriesWhileWaiting = 0; // number of queries since tracker has been tracking an/any event
 	private boolean waiting;
 	private HashMap<K, Meta> map = new HashMap<K, Meta>();
 	private Queue<K> eventQueue = new LinkedList<K>();
@@ -19,7 +22,7 @@ public class AsynchronousTracker<K>  {
 		return ret;
 	}
 	
-	public synchronized void set(K event) {
+	public synchronized void setEvent(K event) {
 		if( map.containsKey(event) ) {
 			map.put(event, new Meta( System.currentTimeMillis()) );
 			setWaiting(true);
@@ -33,6 +36,7 @@ public class AsynchronousTracker<K>  {
 		}
 		return ret;
 	}
+	
 	
 	public synchronized int getNumberQueries(K event ) {
 		int ret = -1;
@@ -60,6 +64,30 @@ public class AsynchronousTracker<K>  {
 		}
 	}
 	
+	public synchronized boolean querryEvent(K event) {
+		if(map.containsKey(event)) {
+			
+		}
+	}
+	
+	public synchronized int get
+	
+	private synchronized int incrementQuerriesWhileWating() {
+		int ret = this.nQueriesWhileWaiting++;
+		return ret;
+	}
+	
+	public synchronized boolean querryWaitingState() {
+		if (this.waiting) {
+			incrementQuerriesWhileWating();
+		}
+		return this.waiting;
+	}
+	
+	public synchronized long totalTimeWatining() {
+		return System.currentTimeMillis() - this.waitingStart;
+	}
+	
 	public synchronized void enqueueEvent(K event) {
 		eventQueue.add(event);
 	}
@@ -72,5 +100,17 @@ public class AsynchronousTracker<K>  {
 			this.nQuerries = 0;
 		}
 	}
+	
+	
+	
+	/*	
+	 * set event 
+	 * resolve event 
+	 * query waiting
+	 * query timeWaiting
+	 * query event
+	 * query event time;
+	 * 
+	 */
 	
 }
