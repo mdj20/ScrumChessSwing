@@ -72,6 +72,8 @@ public class GameControl {
 		return ret;
 	}
 	
+
+	
 	
 	public void newGameBackend(NewGameConfig config) {
 		NewGameRequest ngr = new NewGameRequest(new SimpleUserAuthenticationInfo<String>(getUser1Cred()),config,getUser2Name());

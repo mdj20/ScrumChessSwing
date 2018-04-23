@@ -38,13 +38,15 @@ public class MainInfoPanel extends JPanel implements InfoPanel {
 		createButtons(5);
 		addButtons(buttons);
 		addPrintListener(buttons[0]);
-		//JFormattedTextField gameBox = new JFormattedTextField();
-		//gameBox.setFormatter(GameIdInputBox.buildLongFormatter());
 		this.add(gameBox);
 	}
 	
 	public void setUiControl(UIControl uic) {
 		this.uIControl = uic;
+	}
+	
+	public UIControl getUIcontrol() {
+		return uIControl;
 	}
 	
 	
@@ -59,6 +61,7 @@ public class MainInfoPanel extends JPanel implements InfoPanel {
 	/* (non-Javadoc)
 	 * @see com.mdj20.scrumchessswing.ui.InfoPanel#setGameId(long)
 	 */
+	
 	@Override
 	public void setGameId(final long gameId) {
 		Runnable r = new Runnable() {
@@ -130,6 +133,10 @@ public class MainInfoPanel extends JPanel implements InfoPanel {
 			}
 		};
 		SwingUtilities.invokeLater(r);
+	}
+	
+	public UIControl getUiControl() {
+		return this.uIControl;
 	}
 	
 	private void addPrintListener(JButton button) {

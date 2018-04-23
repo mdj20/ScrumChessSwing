@@ -22,7 +22,7 @@ public class UIControl implements InfoPanel{
 	public void setFromFen(String fen){
 		gameControl = new GameControl(fen);
 	}
-	
+	  
 	public long getGameId() {
 		return mainInfoPanel.getGameId();
 	}
