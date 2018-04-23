@@ -11,7 +11,6 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
-import com.mdj20.scrumchessswing.UIControl;
 import com.mdj20.scrumchessswing.Endpoint;
 import com.scrumchess.gamelogic.RankAndFile;
 

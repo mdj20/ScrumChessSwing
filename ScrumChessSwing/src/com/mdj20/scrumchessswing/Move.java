@@ -13,7 +13,7 @@ public class Move implements AlgebraicNotation {
 	Move(String user){
 		this(user,null,null);
 	}
-	Move(String user, RankAndFile from, RankAndFile to){
+	public Move(String user, RankAndFile from, RankAndFile to){
 		this.user = user;
 		this.from = from;
 		this.to= to;

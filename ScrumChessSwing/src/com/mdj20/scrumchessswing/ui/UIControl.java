@@ -1,13 +1,14 @@
-package com.mdj20.scrumchessswing;
+package com.mdj20.scrumchessswing.ui;
 
 import javax.swing.SwingUtilities;
 
-import com.mdj20.scrumchessswing.ui.BoardPanel;
-import com.mdj20.scrumchessswing.ui.InfoPanel;
-import com.mdj20.scrumchessswing.ui.MoveExecuteWorker;
+import com.mdj20.scrumchessswing.Move;
+import com.mdj20.scrumchessswing.background.GameControl;
+import com.mdj20.scrumchessswing.ui.workers.MoveExecuteWorker;
 import com.scrumchess.gamelogic.FenUtility;
 import com.scrumchess.gamelogic.MoveValidator;
 import com.scrumchess.gamelogic.RankAndFile;
+import com.scrumchess.userrequests.NewGameRequest.NewGameConfig;
 
 public class UIControl implements InfoPanel{
 	BoardPanel boardPanel;
@@ -90,5 +91,10 @@ public class UIControl implements InfoPanel{
 	@Override
 	public void setUser2(String user2) {
 		mainInfoPanel.setUser2(user2);	
+	}
+
+	@Override
+	public NewGameConfig getGameConfig() {
+		return mainInfoPanel.getGameConfig();
 	}
 }

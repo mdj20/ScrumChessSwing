@@ -1,11 +1,11 @@
-package com.mdj20.scrumchessswing.ui;
+package com.mdj20.scrumchessswing.ui.workers;
 
 import java.util.concurrent.ExecutionException;
 
 import javax.swing.SwingWorker;
 
-import com.mdj20.scrumchessswing.UIControl;
-import com.mdj20.scrumchessswing.GameControl;
+import com.mdj20.scrumchessswing.background.GameControl;
+import com.mdj20.scrumchessswing.ui.UIControl;
 import com.mdj20.scrumchessswing.Move;
 
 public class MoveExecuteWorker extends SwingWorker<Boolean, Void> {

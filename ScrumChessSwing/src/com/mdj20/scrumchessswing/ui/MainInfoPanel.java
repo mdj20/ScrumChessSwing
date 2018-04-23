@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.SwingUtilities;
 
-import com.mdj20.scrumchessswing.UIControl;
+import com.scrumchess.userrequests.NewGameRequest.NewGameConfig;
 
 public class MainInfoPanel extends JPanel implements InfoPanel {
 
@@ -20,7 +20,7 @@ public class MainInfoPanel extends JPanel implements InfoPanel {
 	private UIControl uIControl;
 	
 	JButton buttons[] ;
-	JSpinner gameConfigSpinner = new JSpinner() ; 
+	JSpinner gameConfigSpinner = new GameTypeSpinner(); 
 	JButton newGameButton = new JButton("NEW GAME BACK");
 	JButton jButton1 = new JButton("Button 1");
 	JButton jButton2 = new JButton("Button 2");
@@ -37,6 +37,7 @@ public class MainInfoPanel extends JPanel implements InfoPanel {
 		this.add(userName2TextBox);
 		createButtons(5);
 		addButtons(buttons);
+		this.add(gameConfigSpinner)	;
 		addPrintListener(buttons[0]);
 		this.add(gameBox);
 	}
@@ -149,6 +150,11 @@ public class MainInfoPanel extends JPanel implements InfoPanel {
 	
 	public void printInfo() {
 		System.out.println("gameid: "+getGameId()+"\n"+getUser1()+" "+getUser2());
+	}
+
+	@Override
+	public NewGameConfig getGameConfig() {
+		return NewGameConfig.valueOf((String)gameConfigSpinner.getValue());
 	}
 	
 }

@@ -1,16 +1,16 @@
-package com.mdj20.scrumchessswing;
+package com.mdj20.scrumchessswing.background;
 
 import java.util.ArrayList;
 
+import com.mdj20.scrumchessswing.Move;
 import com.mdj20.scrumchessswing.ui.SquarePanel;
+import com.mdj20.scrumchessswing.ui.UIControl;
 import com.scrumchess.authentication.ScrumchessAuthenticationType;
 import com.scrumchess.authentication.SimpleUserAuthenticationInfo;
 import com.scrumchess.authentication.SimpleUserCredentials;
 import com.scrumchess.data.Game;
 import com.scrumchess.gamelogic.AIExecutor;
 import com.scrumchess.gamelogic.FenUtility;
-import com.scrumchess.gamelogic.MoveValidator;
-import com.scrumchess.gamelogic.RankAndFile;
 import com.scrumchess.gamelogic.SimpleAIExecutor;
 import com.scrumchess.gamelogic.SimpleGameExecutor;
 import com.scrumchess.userrequests.NewGameRequest;
@@ -21,13 +21,12 @@ import com.scrumchess.userrequests.UserRequestHandler;
 public class GameControl {
 
 	Long gameId;
+	boolean isBackend = false;
 	UserRequestHandler urHandler = new ScrumchessConnectionBuilder();
 	SimpleUserCredentials user1Cred = new SimpleUserCredentials(ScrumchessAuthenticationType.DEBUG,"user1");
 	String user1Name;
 	String user2Name;
 	SimpleUserCredentials user2Cred = new SimpleUserCredentials(ScrumchessAuthenticationType.DEBUG,"user2");
-	MoveValidator moveValidator = new MoveValidator(FenUtility.STARTING_FEN_LONG);
-	ArrayList<Move> moveHistory = new ArrayList<Move>();
 	AIExecutor aiExec = new SimpleAIExecutor();
 	UIControl uIControl;
 	
@@ -55,10 +54,10 @@ public class GameControl {
 		return user2Name;
 	}
 	
-	GameControl(){
+	public GameControl(){
 		this(FenUtility.STARTING_FEN_LONG);
 	}
-	GameControl(String fen){
+	public GameControl(String fen){
 		aiExec.startGameFromFen(fen);
 	}
 	
@@ -72,9 +71,6 @@ public class GameControl {
 		return ret;
 	}
 	
-
-	
-	
 	public void newGameBackend(NewGameConfig config) {
 		NewGameRequest ngr = new NewGameRequest(new SimpleUserAuthenticationInfo<String>(getUser1Cred()),config,getUser2Name());
 		NewGameResponse response = urHandler.tryNewGameRequest(ngr);
@@ -85,6 +81,7 @@ public class GameControl {
 			System.out.println(response.getRespnseFailureReason().toString());
 		}
 	}
+	
 	
 	
 	
