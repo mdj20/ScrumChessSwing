@@ -18,6 +18,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 
+import com.mdj20.scrumchessswing.UIControl;
 import com.mdj20.scrumchessswing.Endpoint;
 import com.mdj20.scrumchessswing.Piece;
 
