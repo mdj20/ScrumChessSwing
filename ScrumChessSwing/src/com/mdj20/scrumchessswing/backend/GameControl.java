@@ -134,6 +134,10 @@ public class GameControl {
 		}
 	}
 	
+	public void setUiupdator(UIUpdater uiUpdater) {
+		this.uiUpdater = uiUpdater;
+	}
+	
 	public static void main(String args[]) {
 		GameControl gc = new GameControl();
 		SquarePanel from = new SquarePanel(1, 4, null, null);

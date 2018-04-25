@@ -43,7 +43,7 @@ public class MainProxy implements UIUpdater, BackendAccess{
 	}
 
 	@Override
-	public void newGame(NewGameConfig config) {
+	public void newGame(NewGameConfig config, String white, String black) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -54,7 +54,7 @@ public class MainProxy implements UIUpdater, BackendAccess{
 			@Override
 			public void run() {
 				gameControl.cycleAi();
-	
+
 			}		
 		}).start();
 	}
@@ -115,7 +115,4 @@ public class MainProxy implements UIUpdater, BackendAccess{
 		});
 		
 	}
-
-
-
 }
