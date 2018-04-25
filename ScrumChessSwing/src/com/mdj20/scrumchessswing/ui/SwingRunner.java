@@ -1,21 +1,11 @@
 package com.mdj20.scrumchessswing.ui;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.BoxLayout;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 
 import com.mdj20.scrumchessswing.ui.components.BoardPanel;
@@ -41,7 +31,6 @@ public class SwingRunner {
 		CentralUI centralUI  = new CentralUI();
 		BoardPanel boardPanel = new BoardPanel(centralUI,Piece.getPieceKeyMap());
 		topLevel.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	
 		MainInfoPanel info = new MainInfoPanel(centralUI);
 	
 		//boardPanel.setSize(new Dimension(800,800));

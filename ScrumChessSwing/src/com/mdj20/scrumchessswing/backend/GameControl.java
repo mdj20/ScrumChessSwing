@@ -127,10 +127,10 @@ public class GameControl {
 		aiExec.startGameFromFen(game.getFen());
 		this.uiUpdater.setGameId(game.getId());
 		if(game.isWhite()) {
-			this.uiUpdater.setUserWhite(game.getWhite());
+			this.uiUpdater.setWhite(game.getWhite());
 		}
 		if(game.isBlack()) {
-			this.uiUpdater.setUserBlack(game.getBlack());
+			this.uiUpdater.setBlack(game.getBlack());
 		}
 	}
 	
