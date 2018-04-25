@@ -12,6 +12,7 @@ import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
 import com.mdj20.scrumchessswing.backend.BackendAccess;
+import com.mdj20.scrumchessswing.ui.CentralUIAccess;
 import com.mdj20.scrumchessswing.ui.UIInfoAccess;
 import com.scrumchess.gamelogic.RankAndFile;
 
@@ -37,13 +38,14 @@ public class BoardPanel extends JPanel {
 	SquarePanel set;
 	boolean isSquareSet = false;
 	Map<String,String> pieceMap;
-	UIInfoAccess centralUI;
+	CentralUIAccess centralUI;
 
-	BoardPanel (UIInfoAccess centralUI , Map<String,String> pieceMap){
+	public BoardPanel (CentralUIAccess centralUI , Map<String,String> pieceMap){
 		setLayout(new GridLayout(8,8));
 		this.pieceMap = pieceMap;
 		initSquares();
 		this.centralUI = centralUI;
+		centralUI.setBoardPanel(this);
 	}
 	
 	private void initSquares(){

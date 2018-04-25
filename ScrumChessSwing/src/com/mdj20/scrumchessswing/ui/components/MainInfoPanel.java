@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.SwingUtilities;
 
+import com.mdj20.scrumchessswing.ui.CentralUIAccess;
 import com.mdj20.scrumchessswing.ui.UIInfoAccess;
 import com.scrumchess.userrequests.NewGameRequest.NewGameConfig;
 
@@ -18,10 +19,11 @@ public class MainInfoPanel extends JPanel implements InfoPanel {
 	private String user1;
 	private String user2;
 	private long gameId = 0;
-	private UIInfoAccess uIControl;
+	private CentralUIAccess uIControl;
 	
 	JButton buttons[] ;
 	JSpinner gameConfigSpinner = new GameTypeSpinner(); 
+	TurnTextField turnTextField = new TurnTextField();
 	JButton newGameButton = new JButton("NEW GAME BACK");
 	JButton jButton1 = new JButton("Button 1");
 	JButton jButton2 = new JButton("Button 2");
@@ -32,7 +34,9 @@ public class MainInfoPanel extends JPanel implements InfoPanel {
 	UserNameTextBox userNameTextBox = new UserNameTextBox(this);
 	UserName2TextBox userName2TextBox = new UserName2TextBox(this);
 	
-	MainInfoPanel(){
+	public MainInfoPanel(CentralUIAccess uIControl ){
+		this.uIControl = uIControl;
+		uIControl.setInfoPanel(this);
 		this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
 		this.add(userNameTextBox);
 		this.add(userName2TextBox);
@@ -41,38 +45,19 @@ public class MainInfoPanel extends JPanel implements InfoPanel {
 		this.add(gameConfigSpinner)	;
 		addPrintListener(buttons[0]);
 		this.add(gameBox);
+		this.add(turnTextField);
 	}
 	
-	public void setUiControl(UIInfoAccess uic) {
-		this.uIControl = uic;
-	}
+
 	
-	public UIInfoAccess getUIcontrol() {
-		return uIControl;
-	}
-	
-	
-	/* (non-Javadoc)
-	 * @see com.mdj20.scrumchessswing.ui.InfoPanel#getGameId()
-	 */
 	@Override
 	public long getGameId() {
 		return Long.parseLong(gameBox.getText());
 	}
-
-	/* (non-Javadoc)
-	 * @see com.mdj20.scrumchessswing.ui.InfoPanel#setGameId(long)
-	 */
 	
 	@Override
 	public void setGameId(final long gameId) {
-		Runnable r = new Runnable() {
-			@Override
-			public void run() {
-				gameBox.setText(Long.toString(gameId));
-			}
-		};
-		SwingUtilities.invokeLater(r);
+		gameBox.setText(Long.toString(gameId));
 	}
 
 	private void addButtons(JButton but[]) {
@@ -89,52 +74,27 @@ public class MainInfoPanel extends JPanel implements InfoPanel {
 	}
 	
 	
-	/* (non-Javadoc)
-	 * @see com.mdj20.scrumchessswing.ui.InfoPanel#getUser1()
-	 */
-	
 	@Override
-	public String getUser1() {
+	public String getWhite() {
 		return userNameTextBox.getText();
 	}
 
-	/* (non-Javadoc)
-	 * @see com.mdj20.scrumchessswing.ui.InfoPanel#setUser1(java.lang.String)
-	 */
-	
+
 	@Override
-	public void setUser1(final String user1) {
-		Runnable r = new Runnable() {
-			@Override
-			public void run() {
-				userNameTextBox.setText(user1);
-			}
-		};
-		SwingUtilities.invokeLater(r);
+	public void setWhite(final String user1) {
+		userNameTextBox.setText(user1);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.mdj20.scrumchessswing.ui.InfoPanel#getUser2()
-	 */
-	
+
 	@Override
-	public String getUser2() {
+	public String getBlack() {
 		return userName2TextBox.getText();
 	}
 
-	/* (non-Javadoc)
-	 * @see com.mdj20.scrumchessswing.ui.InfoPanel#setUser2(java.lang.String)
-	 */
-	
+
 	@Override
-	public void setUser2(final String user2) {
-		Runnable r = new Runnable() {
-			@Override
-			public void run() {
-				userName2TextBox.setText(user2);
-			}
-		};
-		SwingUtilities.invokeLater(r);
+	public void setBlack(final String user2) {
+			userName2TextBox.setText(user2);
 	}
 	
 
@@ -148,12 +108,27 @@ public class MainInfoPanel extends JPanel implements InfoPanel {
 	}
 	
 	public void printInfo() {
-		System.out.println("gameid: "+getGameId()+"\n"+getUser1()+" "+getUser2());
+		System.out.println("gameid: "+getGameId()+"\n"+getWhite()+" "+getBlack());
 	}
 
 	@Override
 	public NewGameConfig getGameConfig() {
 		return NewGameConfig.valueOf((String)gameConfigSpinner.getValue());
+	}
+
+	@Override
+	public void setGameConfig(NewGameConfig gameConfig) {
+		gameConfigSpinner.setValue(gameConfig);
+	}
+
+	@Override
+	public void setTurnWhite() {
+		turnTextField.setWhite();
+	}
+
+	@Override
+	public void setTurnBlack() {
+		turnTextField.setBlack();
 	}
 	
 }

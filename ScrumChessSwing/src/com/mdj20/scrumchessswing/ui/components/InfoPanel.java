@@ -1,13 +1,17 @@
 package com.mdj20.scrumchessswing.ui.components;
 
 import com.scrumchess.userrequests.NewGameRequest;
+import com.scrumchess.userrequests.NewGameRequest.NewGameConfig;
 
 public interface InfoPanel {
-	long getGameId();
-	void setGameId(long gameId);
-	public NewGameRequest.NewGameConfig getGameConfig();
-	String getUser1();
-	void setUser1(String user1);
-	String getUser2();
-	void setUser2(String user2);
+	public long getGameId();
+	public void setGameId(long gameId);
+	public NewGameConfig getGameConfig();
+	public void setGameConfig(NewGameConfig gameConfig);
+	public String getWhite();
+	public void setWhite(String user1);
+	public String getBlack();
+	public void setBlack(String user2);
+	public void setTurnWhite();
+	public void setTurnBlack();
 }

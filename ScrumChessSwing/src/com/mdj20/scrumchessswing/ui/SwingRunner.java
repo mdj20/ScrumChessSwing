@@ -18,32 +18,32 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 
-import com.mdj20.scrumchessswing.UIControl;
 import com.mdj20.scrumchessswing.ui.components.BoardPanel;
 import com.mdj20.scrumchessswing.ui.components.MainInfoPanel;
 import com.mdj20.scrumchessswing.ui.components.Piece;
-import com.mdj20.scrumchessswing.Endpoint;
+
 
 public class SwingRunner {
 	
 	public static void main(String args[]) throws InterruptedException{
-		final Endpoint endpoint = new Endpoint();
+		
 		
 		SwingUtilities.invokeLater(new Runnable(){
 			public void run(){
-				initGUI(endpoint);
+				initGUI();
 			}
 		});
 	}
 	
-	private static void initGUI(Endpoint ep){
+	private static void initGUI(){
 		JFrame topLevel = new JFrame();
 		topLevel.setLayout(new GridBagLayout());
-		BoardPanel boardPanel = new BoardPanel(ep,Piece.getPieceKeyMap());
+		CentralUI centralUI  = new CentralUI();
+		BoardPanel boardPanel = new BoardPanel(centralUI,Piece.getPieceKeyMap());
 		topLevel.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		MainInfoPanel info = new MainInfoPanel();
-		UIControl uIControl = new UIControl(boardPanel,info);
-		boardPanel.setBoardControl(uIControl);
+	
+		MainInfoPanel info = new MainInfoPanel(centralUI);
+	
 		//boardPanel.setSize(new Dimension(800,800));
 		topLevel.add(boardPanel,boardConstraints());
 		topLevel.add(info,infoConstraints());

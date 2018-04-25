@@ -7,5 +7,5 @@ public interface UIInfoAccess extends UIUpdater{
 	public NewGameConfig getNewGameConfig();
 	public String getWhite();
 	public String getBlack();
-	public String getGameId();
+	public long getGameId();
 }
