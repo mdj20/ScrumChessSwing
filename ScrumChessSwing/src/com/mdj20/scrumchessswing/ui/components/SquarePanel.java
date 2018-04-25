@@ -1,4 +1,4 @@
-package com.mdj20.scrumchessswing.ui;
+package com.mdj20.scrumchessswing.ui.components;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;

@@ -1,11 +1,10 @@
-package com.mdj20.scrumchessswing.background;
+package com.mdj20.scrumchessswing.backend;
 
 import java.util.ArrayList;
 
-import com.mdj20.scrumchessswing.Move;
-import com.mdj20.scrumchessswing.ui.SquarePanel;
-import com.mdj20.scrumchessswing.ui.UIControl; 
+import com.mdj20.scrumchessswing.ui.Move;
 import com.mdj20.scrumchessswing.ui.UIUpdater;
+import com.mdj20.scrumchessswing.ui.components.SquarePanel;
 import com.scrumchess.authentication.ScrumchessAuthenticationType;
 import com.scrumchess.authentication.SimpleUserAuthenticationInfo;
 import com.scrumchess.authentication.SimpleUserCredentials;
@@ -29,7 +28,7 @@ public class GameControl {
 	String user1Name;
 	ScrumchessAuthenticationType user1authtype = ScrumchessAuthenticationType.DEBUG; 
 	String user2Name;
-	ScrumchessAuthenticationType user2authtype = ScrumchessAuthenticationType.DEBUG; 
+	ScrumchessAuthenticationType user2authtype = ScrumchessAuthenticationType.DEBUG;  
 	SimpleUserCredentials user2Cred = new SimpleUserCredentials(ScrumchessAuthenticationType.DEBUG,"user2");
 	AIExecutor aiExec = new SimpleAIExecutor();
 	UIUpdater uiUpdater;
@@ -45,10 +44,13 @@ public class GameControl {
 	public void updateUser1Token(String token) {
 		if (!user1Name.equals(token)) {
 			user1Name = token;
-			user1Cred
 		}
 	}
 	
+	
+	public UserCredentialHelper getUserCredentialHelper() {
+		return userCredentialHelper;
+	}
 	
 	public boolean tryMove(Move move) {
 		boolean ret = false;
@@ -61,7 +63,7 @@ public class GameControl {
 	}
 	
 	public void newGameBackend(NewGameConfig config) {
-		NewGameRequest ngr = new NewGameRequest(new SimpleUserAuthenticationInfo<String>(getUser1Cred()),config,getUser2Name());
+		NewGameRequest ngr = new NewGameRequest(new SimpleUserAuthenticationInfo<String>(userCredentialHelper.getWhiteCred()),config);
 		NewGameResponse response = urHandler.tryNewGameRequest(ngr);
 		if(response.isSuccessful()) {
 			setFromGameObject(response.getResponseObject());
@@ -71,8 +73,42 @@ public class GameControl {
 		}
 	}
 	
+	public void tryMoveAndUpdate(Move move) {
+		if(isBackend) {
+			System.out.println("BE not implemented");
+		}
+		else {
+			if(aiExec.executeMove(move)) {
+				uiUpdater.setBoard(getShortFen());
+			}
+		}
+	}
+	
+	public void newGameOffline(NewGameConfig config) {
+		aiExec = new SimpleAIExecutor();
+		this.gameConfig = config;
+		uiUpdater.setBoard(aiExec.getShortFen());
+	}
+	
+	public void cycleAi() {
+		if(aiExec.getGameStatus()==0) {
+			if( gameConfig.equals(NewGameConfig.WHITE) && !aiExec.isWhiteTurn() ) {
+				String nextMove = aiExec.getAIMoveString();
+				aiExec.checkMove( nextMove );
+				uiUpdater.setBoard( aiExec.getShortFen() );
+			}
+			else if ( gameConfig.equals(NewGameConfig.BLACK) && aiExec.isWhiteTurn() ) {
+				String nextMove = aiExec.getAIMoveString();
+				aiExec.checkMove( nextMove );
+				uiUpdater.setBoard( aiExec.getShortFen() );
+			}
+		}
+	}
 	
 	
+	public String getAiMove() {
+		return aiExec.getAIMoveString();
+	}
 	
 		
 	public int getEndgameState() {
@@ -102,7 +138,7 @@ public class GameControl {
 		GameControl gc = new GameControl();
 		SquarePanel from = new SquarePanel(1, 4, null, null);
 		SquarePanel to = new SquarePanel(3,4,null,null);
-		Move move = new Move("user",from,to);
+		Move move = new Move(from,to);
 		System.out.print(gc.tryMove(move));
 		System.out.println(gc.getFen());
 	}

@@ -1,4 +1,4 @@
-package com.mdj20.scrumchessswing.background;
+package com.mdj20.scrumchessswing.backend;
 
 import com.scrumchess.authentication.ScrumchessAuthenticationType;
 import com.scrumchess.authentication.SimpleUserCredentials;
@@ -47,6 +47,7 @@ public class UserCredentialHelper {
 		this.blackAuthType = blackAuthType;
 	}
 
+	
 	public String getWhiteToken() {
 		return whiteToken;
 	}
@@ -55,6 +56,17 @@ public class UserCredentialHelper {
 		return blackToken;
 	}
 
+	public SimpleUserCredentials getWhiteCred(String token) {
+		setWhiteToken(whiteToken);
+		return getWhiteCred();
+	}
+	
+	public SimpleUserCredentials getBlackCred(String token) {
+		setBlackToken(whiteToken);
+		return getBlackCred();
+	}
+	
+	
 	public ScrumchessAuthenticationType getWhiteAuthType() {
 		return whiteAuthType;
 	}

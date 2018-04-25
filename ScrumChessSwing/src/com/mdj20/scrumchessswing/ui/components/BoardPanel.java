@@ -1,4 +1,4 @@
-package com.mdj20.scrumchessswing.ui;
+package com.mdj20.scrumchessswing.ui.components;
 
 import java.awt.Color;
 import java.awt.GridLayout;
@@ -11,7 +11,8 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
-import com.mdj20.scrumchessswing.Endpoint;
+import com.mdj20.scrumchessswing.backend.BackendAccess;
+import com.mdj20.scrumchessswing.ui.UIInfoAccess;
 import com.scrumchess.gamelogic.RankAndFile;
 
 public class BoardPanel extends JPanel {
@@ -35,15 +36,14 @@ public class BoardPanel extends JPanel {
 	SquarePanel blackToSet;
 	SquarePanel set;
 	boolean isSquareSet = false;
-	Endpoint endpoint;
 	Map<String,String> pieceMap;
-	UIControl uIControl;
+	UIInfoAccess centralUI;
 
-	BoardPanel(Endpoint ep, Map<String,String> pieceMap){
+	BoardPanel (UIInfoAccess centralUI , Map<String,String> pieceMap){
 		setLayout(new GridLayout(8,8));
 		this.pieceMap = pieceMap;
 		initSquares();
-		this.endpoint = ep;
+		this.centralUI = centralUI;
 	}
 	
 	private void initSquares(){
@@ -115,7 +115,7 @@ public class BoardPanel extends JPanel {
 		}
 		else if( this.isSquareSet && !clicked.equals(this.set) ){  // another square is clicked.
 			unHighLight(this.set);
-			this.uIControl.tryMoveWorker("test", this.set,clicked);
+			this.centralUI.tryMove(set,clicked);
 			clearSquare();
 			System.out.println("CLicked elsewhere");
 		}
@@ -187,9 +187,7 @@ public class BoardPanel extends JPanel {
 		s.setBackground(s.getNormalColor());
 	}
 	
-	public void setBoardControl(UIControl bc) {
-		this.uIControl = bc;
-	}
+	
 	
 	
 	

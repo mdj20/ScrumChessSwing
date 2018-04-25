@@ -1,4 +1,4 @@
-package com.mdj20.scrumchessswing;
+package com.mdj20.scrumchessswing.ui.components;
 
 import java.util.ArrayList;
 import java.util.HashMap;

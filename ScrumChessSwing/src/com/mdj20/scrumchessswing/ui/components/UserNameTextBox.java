@@ -1,4 +1,4 @@
-package com.mdj20.scrumchessswing.ui;
+package com.mdj20.scrumchessswing.ui.components;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;

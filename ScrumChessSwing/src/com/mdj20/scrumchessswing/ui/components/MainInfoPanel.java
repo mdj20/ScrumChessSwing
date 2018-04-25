@@ -1,4 +1,4 @@
-package com.mdj20.scrumchessswing.ui;
+package com.mdj20.scrumchessswing.ui.components;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.SwingUtilities;
 
+import com.mdj20.scrumchessswing.ui.UIInfoAccess;
 import com.scrumchess.userrequests.NewGameRequest.NewGameConfig;
 
 public class MainInfoPanel extends JPanel implements InfoPanel {
@@ -17,7 +18,7 @@ public class MainInfoPanel extends JPanel implements InfoPanel {
 	private String user1;
 	private String user2;
 	private long gameId = 0;
-	private UIControl uIControl;
+	private UIInfoAccess uIControl;
 	
 	JButton buttons[] ;
 	JSpinner gameConfigSpinner = new GameTypeSpinner(); 
@@ -42,11 +43,11 @@ public class MainInfoPanel extends JPanel implements InfoPanel {
 		this.add(gameBox);
 	}
 	
-	public void setUiControl(UIControl uic) {
+	public void setUiControl(UIInfoAccess uic) {
 		this.uIControl = uic;
 	}
 	
-	public UIControl getUIcontrol() {
+	public UIInfoAccess getUIcontrol() {
 		return uIControl;
 	}
 	
@@ -136,9 +137,7 @@ public class MainInfoPanel extends JPanel implements InfoPanel {
 		SwingUtilities.invokeLater(r);
 	}
 	
-	public UIControl getUiControl() {
-		return this.uIControl;
-	}
+
 	
 	private void addPrintListener(JButton button) {
 		button.addActionListener(new ActionListener() {

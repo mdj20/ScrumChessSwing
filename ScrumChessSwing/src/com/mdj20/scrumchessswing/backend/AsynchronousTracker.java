@@ -1,4 +1,4 @@
-package com.mdj20.scrumchessswing.ui;
+package com.mdj20.scrumchessswing.backend;
 
 import java.util.HashMap;
 import java.util.LinkedList;

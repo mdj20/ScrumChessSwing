@@ -1,4 +1,4 @@
-package com.mdj20.scrumchessswing.background;
+package com.mdj20.scrumchessswing.backend;
 
 import java.io.BufferedReader;
 import java.io.IOException;

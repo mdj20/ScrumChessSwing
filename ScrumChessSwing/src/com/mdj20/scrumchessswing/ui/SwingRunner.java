@@ -19,14 +19,15 @@ import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 
 import com.mdj20.scrumchessswing.UIControl;
+import com.mdj20.scrumchessswing.ui.components.BoardPanel;
+import com.mdj20.scrumchessswing.ui.components.MainInfoPanel;
+import com.mdj20.scrumchessswing.ui.components.Piece;
 import com.mdj20.scrumchessswing.Endpoint;
-import com.mdj20.scrumchessswing.Piece;
 
 public class SwingRunner {
 	
 	public static void main(String args[]) throws InterruptedException{
 		final Endpoint endpoint = new Endpoint();
-		//new Thread(endpoint).start();
 		
 		SwingUtilities.invokeLater(new Runnable(){
 			public void run(){
