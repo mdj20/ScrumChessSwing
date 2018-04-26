@@ -7,19 +7,18 @@ import javax.swing.JButton;
 
 import com.mdj20.scrumchessswing.ui.CentralUIAccess;
 
-public class NewGameJButton extends ScrumchessActionButton {
+public class NewGameButton extends ScrumchessActionButton {
 
-	NewGameJButton(CentralUIAccess infoPanel){
-		super(infoPanel);
-		this.setText("NEW GAME");
-		addListener();
+	NewGameButton(CentralUIAccess infoPanel){
+		super(infoPanel,"NEW GAME");
 	}
 	
-	private void addListener() {
-		this.addActionListener(new ActionListener() {
+	@Override
+	ActionListener getListener() {
+		return new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				centralUIAccess.newGame();
 			}
-		});
+		};
 	}
 }

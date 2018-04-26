@@ -27,6 +27,7 @@ public class MainInfoPanel extends JPanel implements InfoPanel {
 	GameStatusField gameStatusField = new GameStatusField(centralUIAccess);
 
 
+
 	GameIdInputBox gameBox =  new GameIdInputBox(this);
 	
 	UserNameTextBox userNameTextBox = new UserNameTextBox(this);

@@ -35,7 +35,7 @@ public class CentralUI implements CentralUIAccess{
 	
 	@Override
 	public void newGameOnline() {
-		System.out.println("newgameOnline clicked");
+		mainProxy.newGame(getNewGameConfig(), getWhite(), getBlack());
 	}
 	
 	@Override

@@ -5,24 +5,23 @@ import java.awt.event.ActionListener;
 
 import com.mdj20.scrumchessswing.ui.CentralUIAccess;
 
-public class CycleAIButton extends ScrumchessActionButton {
+public class LoadGameButton extends ScrumchessActionButton {
 
-	CycleAIButton(CentralUIAccess centralUIAccess) {
-		super(centralUIAccess,"CYCLE AI");
-		
+	LoadGameButton(CentralUIAccess centralUIAccess) {
+		super(centralUIAccess,"LOAD GAME");
 	}
 
 	@Override
 	ActionListener getListener() {
-		ActionListener ret = new ActionListener(){
+		return new ActionListener(){
+			@Override
 			public void actionPerformed(ActionEvent e) {
-				centralUIAccess.cycleAI();	
+				centralUIAccess.loadGame();
 			}
 		};
-		return ret;
 	}
+
 	
 	
-
-
+	
 }

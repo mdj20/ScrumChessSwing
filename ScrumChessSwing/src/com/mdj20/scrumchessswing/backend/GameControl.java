@@ -17,7 +17,7 @@ import com.scrumchess.userrequests.UserRequestHandler;
 
 public class GameControl {
 	
-	Long gameId = -1l;
+	Long gameId = 0l;
 	boolean isBackend = false;
 	NewGameConfig gameConfig  = NewGameConfig.WHITE;
 	UserRequestHandler urHandler = new ScrumchessConnectionBuilder();
@@ -79,6 +79,34 @@ public class GameControl {
 				uiUpdater.setBoard(getShortFen());
 			}
 		}
+	}
+	
+	
+	public void newGameOnline(NewGameConfig config, String white, String black){
+		updateWhiteToken(white);
+		updateBlackToken(black);
+		NewGameRequest newGameRequest = new NewGameRequest();
+	}
+	
+	private boolean attemptNewGameOnline(NewGameConfig ngc){
+		switch (ngc){
+			case WHITE:{
+				NewGameRequest newGameRequest = new NewGameRequest(new SimpleUserAuthenticationInfo<String>(userCredentialHelper.getWhiteCred()),ngc,userCredentialHelper.getBlackToken());
+				
+				
+			
+			}
+			case  WHITE2:{
+				NewGameRequest newGameRequest = new NewGameRequest(new SimpleUserAuthenticationInfo<String>(userCredentialHelper.getWhiteCred()),ngc,userCredentialHelper.getBlackToken());
+			}
+			case BLACK:{
+				
+			}
+			case BLACK2:{
+				
+			}
+		}
+		return false;
 	}
 	
 	public void newGameOffline(NewGameConfig config) {

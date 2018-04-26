@@ -8,9 +8,7 @@ import com.mdj20.scrumchessswing.ui.CentralUIAccess;
 public class NewOnlineGameButton extends ScrumchessActionButton {
 
 	NewOnlineGameButton(CentralUIAccess centralUIAccess) {
-		super(centralUIAccess);
-		this.setText("NEW GAME ONLINE");
-		addActionListener();
+		super(centralUIAccess,"NEW GAME ONLINE");
 	}
 
 	private void addActionListener(){
@@ -22,6 +20,18 @@ public class NewOnlineGameButton extends ScrumchessActionButton {
 			}
 			
 		});
+	}
+
+	@Override
+	ActionListener getListener() {
+		return new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				centralUIAccess.newGameOnline();
+			}
+			
+		};
 	}
 	
 	

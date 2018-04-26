@@ -18,9 +18,11 @@ public class ButtonPanel extends JPanel {
 		CycleAIButton cia = new CycleAIButton(centralUIAccess);
 		NewOnlineGameButton nogb = new NewOnlineGameButton(centralUIAccess);
 		this.add(nogb);
-		NewGameJButton newGameButton = new NewGameJButton(centralUIAccess);
+		NewGameButton newGameButton = new NewGameButton(centralUIAccess);
 		this.add(cia);
 		this.add(newGameButton);
+		LoadGameButton loadGameButton = new LoadGameButton(centralUIAccess);
+		this.add(loadGameButton);
 	}
 	
 	
