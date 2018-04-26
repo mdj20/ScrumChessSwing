@@ -27,18 +27,23 @@ public class CentralUI implements CentralUIAccess{
 
 	@Override
 	public void newGame() {
-		mainProxy.
+		mainProxy.newGameOffline(this.getNewGameConfig());
+	}
+	
+	@Override
+	public void newGameOnline() {
+		System.out.println("newgameOnline clicked");
 	}
 	
 	@Override
 	public void loadGame() {
-		// TODO Auto-generated method stub
+
+		System.out.println( "loadgame clicked");
 		
 	}
 	@Override
 	public void cycleAI() {
-		// TODO Auto-generated method stub
-		
+		mainProxy.cycleAI();
 	}
 
 
@@ -86,6 +91,11 @@ public class CentralUI implements CentralUIAccess{
 	@Override
 	public void setGameId(long gameId) {
 		infoPanel.setGameId(gameId);
+	}
+
+	@Override
+	public void setBackendAccess(BackendAccess backendAccess) {
+		this.mainProxy = backendAccess;
 	}
 
 }

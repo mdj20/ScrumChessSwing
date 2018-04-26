@@ -20,19 +20,13 @@ import com.scrumchess.userrequests.UserRequestHandler;
 
 public class GameControl {
 	
-	Long gameId;
+	Long gameId = -1l;
 	boolean isBackend = false;
-	NewGameConfig gameConfig;
+	NewGameConfig gameConfig  = NewGameConfig.WHITE;
 	UserRequestHandler urHandler = new ScrumchessConnectionBuilder();
-	SimpleUserCredentials user1Cred = new SimpleUserCredentials(ScrumchessAuthenticationType.DEBUG,"user1");
-	String user1Name;
-	ScrumchessAuthenticationType user1authtype = ScrumchessAuthenticationType.DEBUG; 
-	String user2Name;
-	ScrumchessAuthenticationType user2authtype = ScrumchessAuthenticationType.DEBUG;  
-	SimpleUserCredentials user2Cred = new SimpleUserCredentials(ScrumchessAuthenticationType.DEBUG,"user2");
 	AIExecutor aiExec = new SimpleAIExecutor();
 	UIUpdater uiUpdater;
-	UserCredentialHelper userCredentialHelper;
+	UserCredentialHelper userCredentialHelper = new UserCredentialHelper("user1","user2");
 
 	public GameControl(){
 		this(FenUtility.STARTING_FEN_LONG);
@@ -41,9 +35,15 @@ public class GameControl {
 		aiExec.startGameFromFen(fen);
 	}
 	
-	public void updateUser1Token(String token) {
-		if (!user1Name.equals(token)) {
-			user1Name = token;
+	public void updateWhiteToken(String token) {
+		if ( ! userCredentialHelper.getWhiteToken().equals(token)) {
+			userCredentialHelper.setWhiteToken(token);
+		}
+	}
+	
+	public void updateBlackToken(String token) {
+		if ( ! userCredentialHelper.getBlackToken().equals(token)) {
+			userCredentialHelper.setWhiteToken(token);
 		}
 	}
 	
@@ -133,6 +133,15 @@ public class GameControl {
 			this.uiUpdater.setBlack(game.getBlack());
 		}
 	}
+	
+	public void updateAllUI() {
+		uiUpdater.setBlack(userCredentialHelper.getBlackToken());
+		uiUpdater.setWhite(userCredentialHelper.getWhiteToken());
+		uiUpdater.setBoard(aiExec.getShortFen());
+		uiUpdater.setGameConfig(gameConfig);
+		uiUpdater.setGameId(gameId);
+	}
+	
 	
 	public void setUiupdator(UIUpdater uiUpdater) {
 		this.uiUpdater = uiUpdater;

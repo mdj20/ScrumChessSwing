@@ -11,12 +11,14 @@ public class NewGameJButton extends JButton {
 	
 	NewGameJButton(InfoPanel infoPanel){
 		this.iPanel = infoPanel;
+		this.setText("NEW Game");
+		addListener();
 	}
 	
 	private void addListener() {
 		this.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
-				 
+				 iPanel.getCentralUIAccess().newGame();
 			}
 		});
 	}

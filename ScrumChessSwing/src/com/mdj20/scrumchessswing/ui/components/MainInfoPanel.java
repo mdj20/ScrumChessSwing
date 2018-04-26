@@ -19,7 +19,7 @@ public class MainInfoPanel extends JPanel implements InfoPanel {
 	private String user1;
 	private String user2;
 	private long gameId = 0;
-	private CentralUIAccess uIControl;
+	private CentralUIAccess centralUIAccess;
 	
 	JButton buttons[] ;
 	JSpinner gameConfigSpinner = new GameTypeSpinner(); 
@@ -35,7 +35,7 @@ public class MainInfoPanel extends JPanel implements InfoPanel {
 	UserName2TextBox userName2TextBox = new UserName2TextBox(this);
 	
 	public MainInfoPanel(CentralUIAccess uIControl ){
-		this.uIControl = uIControl;
+		this.centralUIAccess = uIControl;
 		uIControl.setInfoPanel(this);
 		this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
 		this.add(userNameTextBox);
@@ -129,6 +129,13 @@ public class MainInfoPanel extends JPanel implements InfoPanel {
 	@Override
 	public void setTurnBlack() {
 		turnTextField.setBlack();
+	}
+
+
+
+	@Override
+	public CentralUIAccess getCentralUIAccess() {
+		return centralUIAccess;
 	}
 	
 }
