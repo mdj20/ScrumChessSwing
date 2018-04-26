@@ -22,7 +22,4 @@ public class NewGameJButton extends JButton {
 			}
 		});
 	}
-	
-	
-	
 }

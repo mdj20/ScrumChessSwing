@@ -8,6 +8,8 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
+import com.mdj20.scrumchessswing.backend.GameControl;
+import com.mdj20.scrumchessswing.proxyuibackend.MainProxy;
 import com.mdj20.scrumchessswing.ui.components.BoardPanel;
 import com.mdj20.scrumchessswing.ui.components.MainInfoPanel;
 import com.mdj20.scrumchessswing.ui.components.Piece;
@@ -32,7 +34,8 @@ public class SwingRunner {
 		BoardPanel boardPanel = new BoardPanel(centralUI,Piece.getPieceKeyMap());
 		topLevel.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		MainInfoPanel info = new MainInfoPanel(centralUI);
-	
+		GameControl gameControl = new GameControl();
+		MainProxy mainProxy = new MainProxy(centralUI,gameControl);
 		//boardPanel.setSize(new Dimension(800,800));
 		topLevel.add(boardPanel,boardConstraints());
 		topLevel.add(info,infoConstraints());

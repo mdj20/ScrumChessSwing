@@ -22,6 +22,8 @@ public class CentralUI implements CentralUIAccess{
 
 	@Override
 	public void tryMove(final RankAndFile from, final RankAndFile to) {
+		Move move = new Move(from,to);
+		System.out.println(move.getAlabraicNotation());
 		mainProxy.tryMove(new Move(from,to));
 	}
 

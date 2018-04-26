@@ -50,6 +50,7 @@ public class BoardPanel extends JPanel {
 	
 	private void initSquares(){
 		ArrayList<SquarePanel> squareList = new ArrayList<SquarePanel>();
+		
 		for (int i = 7 ; i >= 0 ; i--){
 			for (int j = 0 ; j< 8 ; j++){	
 				if ((i+j)%2==0){
@@ -96,7 +97,7 @@ public class BoardPanel extends JPanel {
 				i--;
 				j=0;
 			}
-		}
+		} // end for
 	}
 	
 	public void setPieceMap(Map<String,String> map) {
@@ -117,9 +118,8 @@ public class BoardPanel extends JPanel {
 		}
 		else if( this.isSquareSet && !clicked.equals(this.set) ){  // another square is clicked.
 			unHighLight(this.set);
-			this.centralUI.tryMove(set,clicked);
+			centralUI.tryMove(set,clicked);
 			clearSquare();
-			System.out.println("CLicked elsewhere");
 		}
 		else{
 			System.out.println("Error");
@@ -188,9 +188,4 @@ public class BoardPanel extends JPanel {
 	private void unHighLight(SquarePanel s){
 		s.setBackground(s.getNormalColor());
 	}
-	
-	
-	
-	
-	
 }

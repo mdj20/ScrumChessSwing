@@ -25,10 +25,11 @@ public class MainProxy implements UIUpdater, BackendAccess{
 	private GameControl gameControl;
 	
 	
-	MainProxy(CentralUIAccess cuia, GameControl gameControl){
+	public MainProxy(CentralUIAccess cuia, GameControl gameControl){
 		this.cuia = cuia;
+		cuia.setBackendAccess(this);
 		this.gameControl = gameControl;
-		
+		gameControl.setUiupdator(this);	
 	}
 	
 	
@@ -47,11 +48,9 @@ public class MainProxy implements UIUpdater, BackendAccess{
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				gameControl.tryMove(move);
-	
+				gameControl.tryMoveAndUpdate(move);
 			}		
 		}).start();
-		
 	}
 
 	@Override
