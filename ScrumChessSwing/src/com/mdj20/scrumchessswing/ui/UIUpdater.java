@@ -8,4 +8,5 @@ public interface UIUpdater {
 	public void setWhite(String user);
 	public void setBlack(String user);
 	public void setGameId(long gameId);
+	public void setGameStatus(String status);
 }

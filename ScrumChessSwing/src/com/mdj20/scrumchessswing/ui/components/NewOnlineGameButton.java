@@ -5,22 +5,24 @@ import java.awt.event.ActionListener;
 
 import com.mdj20.scrumchessswing.ui.CentralUIAccess;
 
-public class CycleAIButton extends ScrumchessActionButton {
+public class NewOnlineGameButton extends ScrumchessActionButton {
 
-	CycleAIButton(CentralUIAccess centralUIAccess) {
+	NewOnlineGameButton(CentralUIAccess centralUIAccess) {
 		super(centralUIAccess);
-		this.setText("CYCLE AI");
+		this.setText("NEW GAME ONLINE");
 		addActionListener();
 	}
-	
-	private void addActionListener() {
-		this.addActionListener( new ActionListener() {
+
+	private void addActionListener(){
+		this.addActionListener(new ActionListener(){
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				centralUIAccess.cycleAI();
-				
+				centralUIAccess.newGameOnline();
 			}
+			
 		});
 	}
-
+	
+	
 }

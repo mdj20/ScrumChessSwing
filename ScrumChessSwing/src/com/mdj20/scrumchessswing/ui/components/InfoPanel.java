@@ -15,5 +15,6 @@ public interface InfoPanel {
 	public void setBlack(String user2);
 	public void setTurnWhite();
 	public void setTurnBlack();
+	public void setGameStatus(String status);
 	public CentralUIAccess getCentralUIAccess();
 }

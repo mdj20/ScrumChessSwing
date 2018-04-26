@@ -29,6 +29,7 @@ public class CentralUI implements CentralUIAccess{
 
 	@Override
 	public void newGame() {
+		System.out.println("newGame");
 		mainProxy.newGameOffline(this.getNewGameConfig());
 	}
 	
@@ -98,6 +99,11 @@ public class CentralUI implements CentralUIAccess{
 	@Override
 	public void setBackendAccess(BackendAccess backendAccess) {
 		this.mainProxy = backendAccess;
+	}
+	@Override
+	public void setGameStatus(String status) {
+		infoPanel.setGameStatus(status);
+		
 	}
 
 }

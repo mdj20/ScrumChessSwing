@@ -5,14 +5,11 @@ import java.util.ArrayList;
 import com.mdj20.scrumchessswing.ui.Move;
 import com.mdj20.scrumchessswing.ui.UIUpdater;
 import com.mdj20.scrumchessswing.ui.components.SquarePanel;
-import com.scrumchess.authentication.ScrumchessAuthenticationType;
 import com.scrumchess.authentication.SimpleUserAuthenticationInfo;
-import com.scrumchess.authentication.SimpleUserCredentials;
 import com.scrumchess.data.Game;
 import com.scrumchess.gamelogic.AIExecutor;
 import com.scrumchess.gamelogic.FenUtility;
 import com.scrumchess.gamelogic.SimpleAIExecutor;
-import com.scrumchess.gamelogic.SimpleGameExecutor;
 import com.scrumchess.userrequests.NewGameRequest;
 import com.scrumchess.userrequests.NewGameRequest.NewGameConfig;
 import com.scrumchess.userrequests.NewGameResponse;
@@ -94,13 +91,13 @@ public class GameControl {
 		if(aiExec.getGameStatus()==0) {
 			if( gameConfig.equals(NewGameConfig.WHITE) && !aiExec.isWhiteTurn() ) {
 				String nextMove = aiExec.getAIMoveString();
-				aiExec.checkMove( nextMove );
-				uiUpdater.setBoard( aiExec.getShortFen() );
+				aiExec.executeMove( nextMove );
+				updateAllUI();
 			}
 			else if ( gameConfig.equals(NewGameConfig.BLACK) && aiExec.isWhiteTurn() ) {
 				String nextMove = aiExec.getAIMoveString();
-				aiExec.checkMove( nextMove );
-				uiUpdater.setBoard( aiExec.getShortFen() );
+				aiExec.executeMove( nextMove );
+				updateAllUI();
 			}
 		}
 	}
@@ -140,6 +137,7 @@ public class GameControl {
 		uiUpdater.setBoard(aiExec.getShortFen());
 		uiUpdater.setGameConfig(gameConfig);
 		uiUpdater.setGameId(gameId);
+		uiUpdater.setGameStatus(Integer.toString(aiExec.getGameStatus()));
 	}
 	
 	

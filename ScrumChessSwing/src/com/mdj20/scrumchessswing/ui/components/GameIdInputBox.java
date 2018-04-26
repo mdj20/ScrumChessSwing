@@ -26,9 +26,7 @@ public class GameIdInputBox extends JFormattedTextField {
 	}
 	
 	
-	private void setSizeConstraints() {
-		this.se
-	}
+	
 	
 	
 	public static NumberFormatter buildLongFormatter() {

@@ -55,8 +55,7 @@ public class MainProxy implements UIUpdater, BackendAccess{
 
 	@Override
 	public void newGame(NewGameConfig config, String white, String black) {
-		// TODO Auto-generated method stub
-		
+		System.out.println("NEW GAME NOT IMPLEMENTED");
 	}
 
 	@Override
@@ -124,5 +123,15 @@ public class MainProxy implements UIUpdater, BackendAccess{
 			}
 		});
 		
+	}
+
+	@Override
+	public void setGameStatus(final String status) {
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				cuia.setGameStatus(status);
+			}
+		});
 	}
 }

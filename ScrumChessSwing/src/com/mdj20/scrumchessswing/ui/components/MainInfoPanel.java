@@ -21,14 +21,12 @@ public class MainInfoPanel extends JPanel implements InfoPanel {
 	private long gameId = 0;
 	private CentralUIAccess centralUIAccess;
 	
-	JButton buttons[] ;
+	
 	JSpinner gameConfigSpinner = new GameTypeSpinner(); 
 	TurnTextField turnTextField = new TurnTextField();
-	JButton newGameButton = new JButton("NEW GAME BACK");
-	JButton jButton1 = new JButton("Button 1");
-	JButton jButton2 = new JButton("Button 2");
-	JButton jButton3 = new JButton("Button 3");
-	JButton jButton4 = new JButton("Button 4");
+	GameStatusField gameStatusField = new GameStatusField(centralUIAccess);
+
+
 	GameIdInputBox gameBox =  new GameIdInputBox(this);
 	
 	UserNameTextBox userNameTextBox = new UserNameTextBox(this);
@@ -43,12 +41,10 @@ public class MainInfoPanel extends JPanel implements InfoPanel {
 		this.add(nte);
 		this.add(userNameTextBox);
 		this.add(userName2TextBox);
-		createButtons(5);
-		addButtons(buttons);
 		this.add(gameConfigSpinner)	;
-		addPrintListener(buttons[0]);
 		this.add(gameBox);
 		this.add(turnTextField);
+		this.add(gameStatusField);
 		ButtonPanel buttonPanel = new ButtonPanel(centralUIAccess);
 		this.add(buttonPanel);
 	}
@@ -62,23 +58,10 @@ public class MainInfoPanel extends JPanel implements InfoPanel {
 	
 	@Override
 	public void setGameId(final long gameId) {
+		System.out.println("GameID "+gameId);
 		gameBox.setText(Long.toString(gameId));
 	}
 
-	private void addButtons(JButton but[]) {
-		for(JButton jb: but) {
-			this.add(jb);
-		}
-	}
-	
-	private void createButtons(int n) {
-		buttons = new JButton[n];
-		for(int i = 0 ; i< n ; i++) {
-			buttons[i] = new JButton("Button "+i);
-		}	
-	}
-	
-	
 	@Override
 	public String getWhite() {
 		return userNameTextBox.getText();
@@ -118,7 +101,7 @@ public class MainInfoPanel extends JPanel implements InfoPanel {
 
 	@Override
 	public NewGameConfig getGameConfig() {
-		return NewGameConfig.valueOf((String)gameConfigSpinner.getValue());
+		return (NewGameConfig) gameConfigSpinner.getValue();
 	}
 
 	@Override
@@ -136,11 +119,17 @@ public class MainInfoPanel extends JPanel implements InfoPanel {
 		turnTextField.setBlack();
 	}
 
-
-
 	@Override
 	public CentralUIAccess getCentralUIAccess() {
 		return centralUIAccess;
+	}
+
+
+
+	@Override
+	public void setGameStatus(String status) {
+		gameStatusField.setText(status);
+		
 	}
 	
 }
