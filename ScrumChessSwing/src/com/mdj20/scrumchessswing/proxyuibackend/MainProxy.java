@@ -12,7 +12,7 @@ import com.mdj20.scrumchessswing.ui.Move;
 import com.mdj20.scrumchessswing.ui.UIUpdater;
 import com.scrumchess.userrequests.NewGameRequest.NewGameConfig;
 
-/**Class serves as a thread barrier between game control and 
+/**Class serves as a thread barrier between game control and UI.
  * 
  * @author Matthew D. Jeffreys
  *
@@ -21,13 +21,25 @@ import com.scrumchess.userrequests.NewGameRequest.NewGameConfig;
 
 public class MainProxy implements UIUpdater, BackendAccess{
 
-	CentralUIAccess cuia;
-	GameControl gameControl;
+	private CentralUIAccess cuia;
+	private GameControl gameControl;
+	
+	
+	MainProxy(CentralUIAccess cuia, GameControl gameControl){
+		this.cuia = cuia;
+		this.gameControl = gameControl;
+		
+	}
 	
 	
 	@Override
-	public void newGameOffline(NewGameConfig config) {
-		
+	public void newGameOffline(final NewGameConfig config) {
+		new Thread (new Runnable() {
+			@Override
+			public void run() {
+				gameControl.newGameOffline(config);
+			}
+		}).start();
 	}
 
 	@Override
@@ -54,7 +66,6 @@ public class MainProxy implements UIUpdater, BackendAccess{
 			@Override
 			public void run() {
 				gameControl.cycleAi();
-
 			}		
 		}).start();
 	}
