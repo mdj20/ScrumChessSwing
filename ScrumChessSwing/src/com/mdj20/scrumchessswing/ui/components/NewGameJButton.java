@@ -5,20 +5,20 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
-public class NewGameJButton extends JButton {
+import com.mdj20.scrumchessswing.ui.CentralUIAccess;
 
-	InfoPanel iPanel;
-	
-	NewGameJButton(InfoPanel infoPanel){
-		this.iPanel = infoPanel;
-		this.setText("NEW Game");
+public class NewGameJButton extends ScrumchessActionButton {
+
+	NewGameJButton(CentralUIAccess infoPanel){
+		super(infoPanel);
+		this.setText("NEW GAME");
 		addListener();
 	}
 	
 	private void addListener() {
 		this.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
-				 iPanel.getCentralUIAccess().newGame();
+				centralUIAccess.newGame();
 			}
 		});
 	}

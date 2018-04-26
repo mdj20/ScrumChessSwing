@@ -38,6 +38,9 @@ public class MainInfoPanel extends JPanel implements InfoPanel {
 		this.centralUIAccess = uIControl;
 		uIControl.setInfoPanel(this);
 		this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
+		NameTextArea nte = new NameTextArea(this);
+		nte.setText("THIS IS THE TEXT");
+		this.add(nte);
 		this.add(userNameTextBox);
 		this.add(userName2TextBox);
 		createButtons(5);
@@ -46,6 +49,8 @@ public class MainInfoPanel extends JPanel implements InfoPanel {
 		addPrintListener(buttons[0]);
 		this.add(gameBox);
 		this.add(turnTextField);
+		ButtonPanel buttonPanel = new ButtonPanel(centralUIAccess);
+		this.add(buttonPanel);
 	}
 	
 

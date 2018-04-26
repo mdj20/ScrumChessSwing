@@ -16,6 +16,7 @@ public class GameIdInputBox extends JFormattedTextField {
 	/**
 	 * 
 	 */
+	
 	private static final long serialVersionUID = 5303331757078319524L;
 
 	GameIdInputBox(MainInfoPanel mainInfoPanel){
@@ -24,10 +25,15 @@ public class GameIdInputBox extends JFormattedTextField {
 		defaultKeyListener();
 	}
 	
+	
+	private void setSizeConstraints() {
+		this.se
+	}
+	
+	
 	public static NumberFormatter buildLongFormatter() {
 		 NumberFormat format = NumberFormat.getInstance();
 		 format.setGroupingUsed(false);	
-
 		    NumberFormatter formatter = new NumberFormatter(format);
 		    formatter.setValueClass(Long.class);
 		    formatter.setMinimum(0L);
@@ -54,10 +60,8 @@ public class GameIdInputBox extends JFormattedTextField {
 						if(box.getText().length()>0) {
 							mainInfoPanel.requestFocus();
 						}
-						
 					}
 				}
-		
 			}
 
 			@Override
