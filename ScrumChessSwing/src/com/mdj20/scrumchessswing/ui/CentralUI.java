@@ -40,9 +40,7 @@ public class CentralUI implements CentralUIAccess{
 	
 	@Override
 	public void loadGame() {
-
 		System.out.println( "loadgame clicked");
-		
 	}
 	@Override
 	public void cycleAI() {

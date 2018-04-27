@@ -54,8 +54,13 @@ public class MainProxy implements UIUpdater, BackendAccess{
 	}
 
 	@Override
-	public void newGame(NewGameConfig config, String white, String black) {
-		System.out.println("NEW GAME NOT IMPLEMENTED");
+	public void newGame(final NewGameConfig config, final String white, final String black) {
+		new Thread (new Runnable() {
+			@Override
+			public void run() {
+				gameControl.newGameOnline(config, white, black);
+			}		
+		}).start();
 	}
 
 	@Override

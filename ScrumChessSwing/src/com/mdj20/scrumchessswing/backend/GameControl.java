@@ -85,15 +85,19 @@ public class GameControl {
 	public void newGameOnline(NewGameConfig config, String white, String black){
 		updateWhiteToken(white);
 		updateBlackToken(black);
-		NewGameRequest newGameRequest = new NewGameRequest();
+		attemptNewGameOnline(config);
 	}
 	
 	private boolean attemptNewGameOnline(NewGameConfig ngc){
 		switch (ngc){
 			case WHITE:{
 				NewGameRequest newGameRequest = new NewGameRequest(new SimpleUserAuthenticationInfo<String>(userCredentialHelper.getWhiteCred()),ngc,userCredentialHelper.getBlackToken());
-				
-				
+				NewGameResponse gameResponse = urHandler.tryNewGameRequest(newGameRequest);
+				if(gameResponse.isSuccessful()){
+					System.out.println("SUCCESSFUL");
+					setFromGameObject(gameResponse.getResponseObject());
+				}
+				System.out.println("Not successful");
 			
 			}
 			case  WHITE2:{
@@ -150,12 +154,24 @@ public class GameControl {
 	
 	public void setFromGameObject(Game game) {
 		aiExec.startGameFromFen(game.getFen());
+		this.gameId = game.getId();
+		this.gameConfig = gameConfigFix(game.isWhite(),game.isBlack());
 		this.uiUpdater.setGameId(game.getId());
-		if(game.isWhite()) {
-			this.uiUpdater.setWhite(game.getWhite());
+		updateAllUI();
+	}
+	
+	private NewGameConfig gameConfigFix(boolean white, boolean black){
+		if(white&&black){
+			return NewGameConfig.WHITE2;
 		}
-		if(game.isBlack()) {
-			this.uiUpdater.setBlack(game.getBlack());
+		else if(black){
+			return NewGameConfig.BLACK;
+		}
+		else if(white){
+			return NewGameConfig.WHITE;
+		}
+		else{
+			return NewGameConfig.BLACK2;
 		}
 	}
 	
