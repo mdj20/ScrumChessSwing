@@ -12,7 +12,7 @@ import javax.swing.SwingUtilities;
 
 import com.mdj20.scrumchessswing.ui.CentralUIAccess;
 import com.mdj20.scrumchessswing.ui.UIInfoAccess;
-import com.scrumchess.userrequests.NewGameRequest.NewGameConfig;
+import com.scrumchess.userrequests.GameConfiguration;
 
 public class MainInfoPanel extends JPanel implements InfoPanel {
 
@@ -101,12 +101,12 @@ public class MainInfoPanel extends JPanel implements InfoPanel {
 	}
 
 	@Override
-	public NewGameConfig getGameConfig() {
-		return (NewGameConfig) gameConfigSpinner.getValue();
+	public GameConfiguration getGameConfig() {
+		return (GameConfiguration) gameConfigSpinner.getValue();
 	}
 
 	@Override
-	public void setGameConfig(NewGameConfig gameConfig) {
+	public void setGameConfig(GameConfiguration gameConfig) {
 		gameConfigSpinner.setValue(gameConfig);
 	}
 

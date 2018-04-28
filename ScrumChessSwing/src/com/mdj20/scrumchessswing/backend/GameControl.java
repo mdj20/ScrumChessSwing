@@ -10,8 +10,8 @@ import com.scrumchess.data.Game;
 import com.scrumchess.gamelogic.AIExecutor;
 import com.scrumchess.gamelogic.FenUtility;
 import com.scrumchess.gamelogic.SimpleAIExecutor;
+import com.scrumchess.userrequests.GameConfiguration;
 import com.scrumchess.userrequests.NewGameRequest;
-import com.scrumchess.userrequests.NewGameRequest.NewGameConfig;
 import com.scrumchess.userrequests.NewGameResponse;
 import com.scrumchess.userrequests.UserRequestHandler;
 
@@ -19,7 +19,7 @@ public class GameControl {
 	
 	Long gameId = 0l;
 	boolean isBackend = false;
-	NewGameConfig gameConfig  = NewGameConfig.WHITE;
+	GameConfiguration gameConfig  = GameConfiguration.WHITE;
 	UserRequestHandler urHandler = new ScrumchessConnectionBuilder();
 	AIExecutor aiExec = new SimpleAIExecutor();
 	UIUpdater uiUpdater;
@@ -59,7 +59,7 @@ public class GameControl {
 		return ret;
 	}
 	
-	public void newGameBackend(NewGameConfig config) {
+	public void newGameBackend(GameConfiguration config) {
 		NewGameRequest ngr = new NewGameRequest(new SimpleUserAuthenticationInfo<String>(userCredentialHelper.getWhiteCred()),config);
 		NewGameResponse response = urHandler.tryNewGameRequest(ngr);
 		if(response.isSuccessful()) {
@@ -82,13 +82,13 @@ public class GameControl {
 	}
 	
 	
-	public void newGameOnline(NewGameConfig config, String white, String black){
+	public void newGameOnline(GameConfiguration config, String white, String black){
 		updateWhiteToken(white);
 		updateBlackToken(black);
 		attemptNewGameOnline(config);
 	}
 	
-	private boolean attemptNewGameOnline(NewGameConfig ngc){
+	private boolean attemptNewGameOnline(GameConfiguration ngc){
 		switch (ngc){
 			case WHITE:{
 				NewGameRequest newGameRequest = new NewGameRequest(new SimpleUserAuthenticationInfo<String>(userCredentialHelper.getWhiteCred()),ngc,userCredentialHelper.getBlackToken());
@@ -113,7 +113,7 @@ public class GameControl {
 		return false;
 	}
 	
-	public void newGameOffline(NewGameConfig config) {
+	public void newGameOffline(GameConfiguration config) {
 		aiExec = new SimpleAIExecutor();
 		this.gameConfig = config;
 		uiUpdater.setBoard(aiExec.getShortFen());
@@ -121,12 +121,12 @@ public class GameControl {
 	
 	public void cycleAi() {
 		if(aiExec.getGameStatus()==0) {
-			if( gameConfig.equals(NewGameConfig.WHITE) && !aiExec.isWhiteTurn() ) {
+			if( gameConfig.equals(GameConfiguration.WHITE) && !aiExec.isWhiteTurn() ) {
 				String nextMove = aiExec.getAIMoveString();
 				aiExec.executeMove( nextMove );
 				updateAllUI();
 			}
-			else if ( gameConfig.equals(NewGameConfig.BLACK) && aiExec.isWhiteTurn() ) {
+			else if ( gameConfig.equals(GameConfiguration.BLACK) && aiExec.isWhiteTurn() ) {
 				String nextMove = aiExec.getAIMoveString();
 				aiExec.executeMove( nextMove );
 				updateAllUI();
@@ -160,18 +160,18 @@ public class GameControl {
 		updateAllUI();
 	}
 	
-	private NewGameConfig gameConfigFix(boolean white, boolean black){
+	private GameConfiguration gameConfigFix(boolean white, boolean black){
 		if(white&&black){
-			return NewGameConfig.WHITE2;
+			return GameConfiguration.WHITE2;
 		}
 		else if(black){
-			return NewGameConfig.BLACK;
+			return GameConfiguration.BLACK;
 		}
 		else if(white){
-			return NewGameConfig.WHITE;
+			return GameConfiguration.WHITE;
 		}
 		else{
-			return NewGameConfig.BLACK2;
+			return GameConfiguration.BLACK2;
 		}
 	}
 	

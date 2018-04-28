@@ -1,9 +1,9 @@
 package com.mdj20.scrumchessswing.ui;
 
-import com.scrumchess.userrequests.NewGameRequest.NewGameConfig;
+import com.scrumchess.userrequests.GameConfiguration;
 
 public interface UIUpdater {
-	public void setGameConfig(NewGameConfig newGameConfig);
+	public void setGameConfig(GameConfiguration gameConfiguration);
 	public void setBoard(String fen);
 	public void setWhite(String user);
 	public void setBlack(String user);

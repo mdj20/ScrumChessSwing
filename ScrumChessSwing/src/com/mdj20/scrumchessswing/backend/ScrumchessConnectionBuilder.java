@@ -23,6 +23,7 @@ import com.scrumchess.userrequests.GameLoadRequest;
 import com.scrumchess.userrequests.GameLoadResponse;
 import com.scrumchess.userrequests.MoveRequest;
 import com.scrumchess.userrequests.MoveRequestResponse;
+import com.scrumchess.userrequests.GameConfiguration;
 import com.scrumchess.userrequests.NewGameRequest;
 import com.scrumchess.userrequests.NewGameResponse;
 import com.scrumchess.userrequests.ScrumChessGsonBuilder;
@@ -93,7 +94,7 @@ public class ScrumchessConnectionBuilder implements UserRequestHandler{
 	//smoketest
 	public static void main(String args[]) {
 		SimpleUserAuthenticationInfo<String> userInfo = new SimpleUserAuthenticationInfo<String>(new SimpleUserCredentials(ScrumchessAuthenticationType.DEBUG,"User1"));
-		NewGameRequest ngrequest = new NewGameRequest(userInfo,NewGameRequest.NewGameConfig.WHITE);
+		NewGameRequest ngrequest = new NewGameRequest(userInfo,GameConfiguration.WHITE);
 		ScrumchessConnectionBuilder scb = new ScrumchessConnectionBuilder();
 		HttpURLConnection conn = scb.buildScrumchessConnection("/newgamegson");
 		Gson gson = new Gson();

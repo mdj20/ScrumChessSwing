@@ -1,12 +1,12 @@
 package com.mdj20.scrumchessswing.backend;
 
 import com.mdj20.scrumchessswing.ui.Move;
-import com.scrumchess.userrequests.NewGameRequest.NewGameConfig;
+import com.scrumchess.userrequests.GameConfiguration;
 
 public interface BackendAccess {
-	public void newGameOffline( NewGameConfig config);
+	public void newGameOffline( GameConfiguration config);
 	public void tryMove(Move move);
-	public void newGame( NewGameConfig config, String white, String black );
+	public void newGame( GameConfiguration config, String white, String black );
 	public void cycleAI();
 	public void gameLoad(long gameID);
 }

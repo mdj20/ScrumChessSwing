@@ -10,7 +10,7 @@ import com.mdj20.scrumchessswing.backend.GameControl;
 import com.mdj20.scrumchessswing.ui.CentralUIAccess;
 import com.mdj20.scrumchessswing.ui.Move;
 import com.mdj20.scrumchessswing.ui.UIUpdater;
-import com.scrumchess.userrequests.NewGameRequest.NewGameConfig;
+import com.scrumchess.userrequests.GameConfiguration;
 
 /**Class serves as a thread barrier between game control and UI.
  * 
@@ -34,7 +34,7 @@ public class MainProxy implements UIUpdater, BackendAccess{
 	
 	
 	@Override
-	public void newGameOffline(final NewGameConfig config) {
+	public void newGameOffline(final GameConfiguration config) {
 		new Thread (new Runnable() {
 			@Override
 			public void run() {
@@ -54,7 +54,7 @@ public class MainProxy implements UIUpdater, BackendAccess{
 	}
 
 	@Override
-	public void newGame(final NewGameConfig config, final String white, final String black) {
+	public void newGame(final GameConfiguration config, final String white, final String black) {
 		new Thread (new Runnable() {
 			@Override
 			public void run() {
@@ -80,11 +80,11 @@ public class MainProxy implements UIUpdater, BackendAccess{
 	}
 	
 	@Override
-	public void setGameConfig(final NewGameConfig newGameConfig) {
+	public void setGameConfig(final GameConfiguration gameConfiguration) {
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
-				cuia.setGameConfig(newGameConfig);
+				cuia.setGameConfig(gameConfiguration);
 			}
 		});
 	}

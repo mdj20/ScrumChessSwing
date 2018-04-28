@@ -1,7 +1,7 @@
 package com.mdj20.scrumchessswing.backend;
 
 import com.mdj20.scrumchessswing.ui.Move;
-import com.scrumchess.userrequests.NewGameRequest.NewGameConfig;
+import com.scrumchess.userrequests.GameConfiguration;
 
 public class SimpleBackendAccess implements BackendAccess {
 
@@ -13,7 +13,7 @@ public class SimpleBackendAccess implements BackendAccess {
 	}
 	
 	@Override
-	public void newGameOffline(final NewGameConfig config) {
+	public void newGameOffline(final GameConfiguration config) {
 		new Thread( new Runnable() {
 			@Override
 			public void run() {
@@ -33,13 +33,13 @@ public class SimpleBackendAccess implements BackendAccess {
 	}
 
 	@Override
-	public void newGame(NewGameConfig config) {
+	public void newGame(GameConfiguration config) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void newGame(NewGameConfig config, String white, String black) {
+	public void newGame(GameConfiguration config, String white, String black) {
 		// TODO Auto-generated method stub
 		
 	}

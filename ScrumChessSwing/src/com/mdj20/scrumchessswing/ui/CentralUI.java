@@ -5,7 +5,7 @@ import com.mdj20.scrumchessswing.proxyuibackend.MainProxy;
 import com.mdj20.scrumchessswing.ui.components.BoardPanel;
 import com.mdj20.scrumchessswing.ui.components.InfoPanel;
 import com.scrumchess.gamelogic.RankAndFile;
-import com.scrumchess.userrequests.NewGameRequest.NewGameConfig;
+import com.scrumchess.userrequests.GameConfiguration;
 
 public class CentralUI implements CentralUIAccess{
 	
@@ -49,7 +49,7 @@ public class CentralUI implements CentralUIAccess{
 
 
 	@Override
-	public NewGameConfig getNewGameConfig() {
+	public GameConfiguration getNewGameConfig() {
 		return infoPanel.getGameConfig();
 	}
 
@@ -69,8 +69,8 @@ public class CentralUI implements CentralUIAccess{
 	}
 
 	@Override
-	public void setGameConfig(NewGameConfig newGameConfig) {
-		infoPanel.setGameConfig(newGameConfig);
+	public void setGameConfig(GameConfiguration gameConfiguration) {
+		infoPanel.setGameConfig(gameConfiguration);
 	}
 
 	@Override
