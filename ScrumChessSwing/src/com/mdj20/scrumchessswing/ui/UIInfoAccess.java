@@ -1,7 +1,7 @@
 package com.mdj20.scrumchessswing.ui;
 
+import com.scrumchess.data.GameConfiguration;
 import com.scrumchess.gamelogic.RankAndFile;
-import com.scrumchess.userrequests.GameConfiguration;
 
 public interface UIInfoAccess extends UIUpdater{
 	public GameConfiguration getNewGameConfig();

@@ -12,7 +12,7 @@ import javax.swing.SwingUtilities;
 
 import com.mdj20.scrumchessswing.ui.CentralUIAccess;
 import com.mdj20.scrumchessswing.ui.UIInfoAccess;
-import com.scrumchess.userrequests.GameConfiguration;
+import com.scrumchess.data.GameConfiguration;
 
 public class MainInfoPanel extends JPanel implements InfoPanel {
 

@@ -1,7 +1,7 @@
 package com.mdj20.scrumchessswing.backend;
 
 import com.mdj20.scrumchessswing.ui.Move;
-import com.scrumchess.userrequests.GameConfiguration;
+import com.scrumchess.data.GameConfiguration;
 
 public class SimpleBackendAccess implements BackendAccess {
 

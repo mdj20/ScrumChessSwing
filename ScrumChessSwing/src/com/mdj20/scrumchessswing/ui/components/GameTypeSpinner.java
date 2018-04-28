@@ -3,7 +3,7 @@ package com.mdj20.scrumchessswing.ui.components;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerListModel;
 
-import com.scrumchess.userrequests.GameConfiguration;
+import com.scrumchess.data.GameConfiguration;
 
 public class GameTypeSpinner extends JSpinner{
 	

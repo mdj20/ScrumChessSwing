@@ -4,8 +4,8 @@ import com.mdj20.scrumchessswing.backend.BackendAccess;
 import com.mdj20.scrumchessswing.proxyuibackend.MainProxy;
 import com.mdj20.scrumchessswing.ui.components.BoardPanel;
 import com.mdj20.scrumchessswing.ui.components.InfoPanel;
+import com.scrumchess.data.GameConfiguration;
 import com.scrumchess.gamelogic.RankAndFile;
-import com.scrumchess.userrequests.GameConfiguration;
 
 public class CentralUI implements CentralUIAccess{
 	

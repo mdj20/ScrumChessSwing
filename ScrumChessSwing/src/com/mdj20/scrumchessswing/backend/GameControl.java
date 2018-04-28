@@ -7,10 +7,10 @@ import com.mdj20.scrumchessswing.ui.UIUpdater;
 import com.mdj20.scrumchessswing.ui.components.SquarePanel;
 import com.scrumchess.authentication.SimpleUserAuthenticationInfo;
 import com.scrumchess.data.Game;
+import com.scrumchess.data.GameConfiguration;
 import com.scrumchess.gamelogic.AIExecutor;
 import com.scrumchess.gamelogic.FenUtility;
 import com.scrumchess.gamelogic.SimpleAIExecutor;
-import com.scrumchess.userrequests.GameConfiguration;
 import com.scrumchess.userrequests.NewGameRequest;
 import com.scrumchess.userrequests.NewGameResponse;
 import com.scrumchess.userrequests.UserRequestHandler;
@@ -91,17 +91,19 @@ public class GameControl {
 	private boolean attemptNewGameOnline(GameConfiguration ngc){
 		switch (ngc){
 			case WHITE:{
-				NewGameRequest newGameRequest = new NewGameRequest(new SimpleUserAuthenticationInfo<String>(userCredentialHelper.getWhiteCred()),ngc,userCredentialHelper.getBlackToken());
+				NewGameRequest newGameRequest = new NewGameRequest(new SimpleUserAuthenticationInfo<String>(userCredentialHelper.getWhiteCred()),ngc);
 				NewGameResponse gameResponse = urHandler.tryNewGameRequest(newGameRequest);
 				if(gameResponse.isSuccessful()){
 					System.out.println("SUCCESSFUL");
 					setFromGameObject(gameResponse.getResponseObject());
 				}
 				System.out.println("Not successful");
-			
+				
+				break;
 			}
 			case  WHITE2:{
 				NewGameRequest newGameRequest = new NewGameRequest(new SimpleUserAuthenticationInfo<String>(userCredentialHelper.getWhiteCred()),ngc,userCredentialHelper.getBlackToken());
+				break;
 			}
 			case BLACK:{
 				
@@ -155,24 +157,9 @@ public class GameControl {
 	public void setFromGameObject(Game game) {
 		aiExec.startGameFromFen(game.getFen());
 		this.gameId = game.getId();
-		this.gameConfig = gameConfigFix(game.isWhite(),game.isBlack());
+		this.gameConfig = game.getGameConfiguration();
 		this.uiUpdater.setGameId(game.getId());
 		updateAllUI();
-	}
-	
-	private GameConfiguration gameConfigFix(boolean white, boolean black){
-		if(white&&black){
-			return GameConfiguration.WHITE2;
-		}
-		else if(black){
-			return GameConfiguration.BLACK;
-		}
-		else if(white){
-			return GameConfiguration.WHITE;
-		}
-		else{
-			return GameConfiguration.BLACK2;
-		}
 	}
 	
 	public void updateAllUI() {

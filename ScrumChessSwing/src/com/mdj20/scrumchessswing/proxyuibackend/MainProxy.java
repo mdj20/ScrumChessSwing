@@ -10,7 +10,7 @@ import com.mdj20.scrumchessswing.backend.GameControl;
 import com.mdj20.scrumchessswing.ui.CentralUIAccess;
 import com.mdj20.scrumchessswing.ui.Move;
 import com.mdj20.scrumchessswing.ui.UIUpdater;
-import com.scrumchess.userrequests.GameConfiguration;
+import com.scrumchess.data.GameConfiguration;
 
 /**Class serves as a thread barrier between game control and UI.
  * 

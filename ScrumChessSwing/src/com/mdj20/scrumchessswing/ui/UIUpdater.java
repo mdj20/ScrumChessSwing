@@ -1,6 +1,6 @@
 package com.mdj20.scrumchessswing.ui;
 
-import com.scrumchess.userrequests.GameConfiguration;
+import com.scrumchess.data.GameConfiguration;
 
 public interface UIUpdater {
 	public void setGameConfig(GameConfiguration gameConfiguration);

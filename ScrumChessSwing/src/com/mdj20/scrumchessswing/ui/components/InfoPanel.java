@@ -1,7 +1,7 @@
 package com.mdj20.scrumchessswing.ui.components;
 
 import com.mdj20.scrumchessswing.ui.CentralUIAccess;
-import com.scrumchess.userrequests.GameConfiguration;
+import com.scrumchess.data.GameConfiguration;
 import com.scrumchess.userrequests.NewGameRequest;
 
 public interface InfoPanel {
