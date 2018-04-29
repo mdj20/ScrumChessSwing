@@ -25,24 +25,18 @@ public class MainInfoPanel extends JPanel implements InfoPanel {
 	JSpinner gameConfigSpinner = new GameTypeSpinner(); 
 	TurnTextField turnTextField = new TurnTextField();
 	GameStatusField gameStatusField = new GameStatusField(centralUIAccess);
-
+	NamePanel namePanel = new NamePanel(centralUIAccess);
 
 
 	GameIdInputBox gameBox =  new GameIdInputBox(this);
 	
-	UserNameTextBox userNameTextBox = new UserNameTextBox(this);
-	UserName2TextBox userName2TextBox = new UserName2TextBox(this);
 	
 	public MainInfoPanel(CentralUIAccess uIControl ){
 		this.centralUIAccess = uIControl;
 		uIControl.setInfoPanel(this);
 		this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
-		NameTextArea nte = new NameTextArea(this);
-		nte.setText("THIS IS THE TEXT");
-		this.add(nte);
-		this.add(userNameTextBox);
-		this.add(userName2TextBox);
-		this.add(gameConfigSpinner)	;
+		this.add(namePanel);
+
 		this.add(gameBox);
 		this.add(turnTextField);
 		this.add(gameStatusField);
@@ -65,25 +59,25 @@ public class MainInfoPanel extends JPanel implements InfoPanel {
 
 	@Override
 	public String getWhite() {
-		return userNameTextBox.getText();
+		return namePanel.getWhite();
 	}
 
 
 	@Override
-	public void setWhite(final String user1) {
-		userNameTextBox.setText(user1);
+	public void setWhite(String user1) {
+		namePanel.setWhite(user1);
 	}
 
 
 	@Override
 	public String getBlack() {
-		return userName2TextBox.getText();
+		return namePanel.getBlack();
 	}
 
 
 	@Override
 	public void setBlack(final String user2) {
-			userName2TextBox.setText(user2);
+		namePanel.setBlack(user2);
 	}
 	
 
@@ -125,12 +119,9 @@ public class MainInfoPanel extends JPanel implements InfoPanel {
 		return centralUIAccess;
 	}
 
-
-
 	@Override
 	public void setGameStatus(String status) {
 		gameStatusField.setText(status);
-		
 	}
 	
 }
