@@ -15,7 +15,7 @@ import com.scrumchess.userrequests.NewGameRequest;
 import com.scrumchess.userrequests.NewGameResponse;
 import com.scrumchess.userrequests.UserRequestHandler;
 
-public class GameControl {
+public class ScrumchessGameControl {
 	
 	Long gameId = 0l;
 	boolean isBackend = false;
@@ -25,10 +25,10 @@ public class GameControl {
 	UIUpdater uiUpdater;
 	UserCredentialHelper userCredentialHelper = new UserCredentialHelper("user1","user2");
 
-	public GameControl(){
+	public ScrumchessGameControl(){
 		this(FenUtility.STARTING_FEN_LONG);
 	}
-	public GameControl(String fen){
+	public ScrumchessGameControl(String fen){
 		aiExec.startGameFromFen(fen);
 	}
 	
@@ -75,12 +75,15 @@ public class GameControl {
 			System.out.println("BE not implemented");
 		}
 		else {
-			if(aiExec.executeMove(move)) {
-				uiUpdater.setBoard(getShortFen());
-			}
+			moveOffline(move);
 		}
 	}
 	
+	private void moveOffline(Move move){
+		if(aiExec.executeMove(move)) {
+			updateAllUI();
+		}
+	}
 	
 	public void newGameOnline(GameConfiguration config, String white, String black){
 		updateWhiteToken(white);
@@ -177,7 +180,7 @@ public class GameControl {
 	}
 	
 	public static void main(String args[]) {
-		GameControl gc = new GameControl();
+		ScrumchessGameControl gc = new ScrumchessGameControl();
 		SquarePanel from = new SquarePanel(1, 4, null, null);
 		SquarePanel to = new SquarePanel(3,4,null,null);
 		Move move = new Move(from,to);

@@ -5,11 +5,11 @@ import com.scrumchess.data.GameConfiguration;
 
 public class SimpleBackendAccess implements BackendAccess {
 
-	GameControl gameControl;
+	ScrumchessGameControl scrumchessGameControl;
 	
 	
-	SimpleBackendAccess(GameControl gameControl){
-		this.gameControl = gameControl;
+	SimpleBackendAccess(ScrumchessGameControl scrumchessGameControl){
+		this.scrumchessGameControl = scrumchessGameControl;
 	}
 	
 	@Override
@@ -17,7 +17,7 @@ public class SimpleBackendAccess implements BackendAccess {
 		new Thread( new Runnable() {
 			@Override
 			public void run() {
-				gameControl.newGameOffline(config);
+				scrumchessGameControl.newGameOffline(config);
 			}
 		}).start();
 	}
@@ -27,7 +27,7 @@ public class SimpleBackendAccess implements BackendAccess {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				gameControl.tryMove(move);
+				scrumchessGameControl.tryMove(move);
 			}
 		}).start();
 	}

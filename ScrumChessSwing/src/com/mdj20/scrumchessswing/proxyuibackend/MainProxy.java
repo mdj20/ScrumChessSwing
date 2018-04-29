@@ -6,7 +6,7 @@ package com.mdj20.scrumchessswing.proxyuibackend;
 
 import javax.swing.SwingUtilities;
 import com.mdj20.scrumchessswing.backend.BackendAccess;
-import com.mdj20.scrumchessswing.backend.GameControl;
+import com.mdj20.scrumchessswing.backend.ScrumchessGameControl;
 import com.mdj20.scrumchessswing.ui.CentralUIAccess;
 import com.mdj20.scrumchessswing.ui.Move;
 import com.mdj20.scrumchessswing.ui.UIUpdater;
@@ -22,14 +22,14 @@ import com.scrumchess.data.GameConfiguration;
 public class MainProxy implements UIUpdater, BackendAccess{
 
 	private CentralUIAccess cuia;
-	private GameControl gameControl;
+	private ScrumchessGameControl scrumchessGameControl;
 	
 	
-	public MainProxy(CentralUIAccess cuia, GameControl gameControl){
+	public MainProxy(CentralUIAccess cuia, ScrumchessGameControl scrumchessGameControl){
 		this.cuia = cuia;
 		cuia.setBackendAccess(this);
-		this.gameControl = gameControl;
-		gameControl.setUiupdator(this);	
+		this.scrumchessGameControl = scrumchessGameControl;
+		scrumchessGameControl.setUiupdator(this);	
 	}
 	
 	
@@ -38,7 +38,7 @@ public class MainProxy implements UIUpdater, BackendAccess{
 		new Thread (new Runnable() {
 			@Override
 			public void run() {
-				gameControl.newGameOffline(config);
+				scrumchessGameControl.newGameOffline(config);
 			}
 		}).start();
 	}
@@ -48,7 +48,7 @@ public class MainProxy implements UIUpdater, BackendAccess{
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				gameControl.tryMoveAndUpdate(move);
+				scrumchessGameControl.tryMoveAndUpdate(move);
 			}		
 		}).start();
 	}
@@ -58,7 +58,7 @@ public class MainProxy implements UIUpdater, BackendAccess{
 		new Thread (new Runnable() {
 			@Override
 			public void run() {
-				gameControl.newGameOnline(config, white, black);
+				scrumchessGameControl.newGameOnline(config, white, black);
 			}		
 		}).start();
 	}
@@ -68,7 +68,7 @@ public class MainProxy implements UIUpdater, BackendAccess{
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				gameControl.cycleAi();
+				scrumchessGameControl.cycleAi();
 			}		
 		}).start();
 	}
