@@ -26,20 +26,15 @@ public class MainInfoPanel extends JPanel implements InfoPanel {
 	TurnTextField turnTextField = new TurnTextField();
 	GameStatusField gameStatusField = new GameStatusField(centralUIAccess);
 	NamePanel namePanel = new NamePanel(centralUIAccess);
+	GameInfoPanel gameInfoPanel = new GameInfoPanel(centralUIAccess);
 
-
-	GameIdInputBox gameBox =  new GameIdInputBox(this);
-	
 	
 	public MainInfoPanel(CentralUIAccess uIControl ){
 		this.centralUIAccess = uIControl;
 		uIControl.setInfoPanel(this);
 		this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
 		this.add(namePanel);
-
-		this.add(gameBox);
-		this.add(turnTextField);
-		this.add(gameStatusField);
+		this.add(gameInfoPanel);
 		ButtonPanel buttonPanel = new ButtonPanel(centralUIAccess);
 		this.add(buttonPanel);
 	}
@@ -48,13 +43,13 @@ public class MainInfoPanel extends JPanel implements InfoPanel {
 	
 	@Override
 	public long getGameId() {
-		return Long.parseLong(gameBox.getText());
+		return Long.parseLong(gameInfoPanel.gameIdInputBox.getText());
 	}
 	
 	@Override
 	public void setGameId(final long gameId) {
 		System.out.println("GameID "+gameId);
-		gameBox.setText(Long.toString(gameId));
+		gameInfoPanel.gameIdInputBox.setText(Long.toString(gameId));
 	}
 
 	@Override
@@ -96,22 +91,22 @@ public class MainInfoPanel extends JPanel implements InfoPanel {
 
 	@Override
 	public GameConfiguration getGameConfig() {
-		return (GameConfiguration) gameConfigSpinner.getValue();
+		return (GameConfiguration) gameInfoPanel.gameTypeSpinner.getValue();
 	}
 
 	@Override
 	public void setGameConfig(GameConfiguration gameConfig) {
-		gameConfigSpinner.setValue(gameConfig);
+		gameInfoPanel.gameTypeSpinner.setValue(gameConfig);
 	}
 
 	@Override
 	public void setTurnWhite() {
-		turnTextField.setWhite();
+		gameInfoPanel.turnTextField.setWhite();
 	}
 
 	@Override
 	public void setTurnBlack() {
-		turnTextField.setBlack();
+		gameInfoPanel.turnTextField.setBlack();
 	}
 
 	@Override
@@ -121,7 +116,7 @@ public class MainInfoPanel extends JPanel implements InfoPanel {
 
 	@Override
 	public void setGameStatus(String status) {
-		gameStatusField.setText(status);
+		gameInfoPanel.gameStatusField.setText(status);
 	}
 	
 }
